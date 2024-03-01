@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Api", "src\Ekid.Api\Ekid.Api.csproj", "{D1299017-1202-4DEE-A5DE-210468B7F96E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Domain", "src\Ekid.Domain\Ekid.Domain.csproj", "{0AEFA387-126D-4D3F-89E3-9468F1D9C724}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1299017-1202-4DEE-A5DE-210468B7F96E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1299017-1202-4DEE-A5DE-210468B7F96E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1299017-1202-4DEE-A5DE-210468B7F96E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1299017-1202-4DEE-A5DE-210468B7F96E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AEFA387-126D-4D3F-89E3-9468F1D9C724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AEFA387-126D-4D3F-89E3-9468F1D9C724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AEFA387-126D-4D3F-89E3-9468F1D9C724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AEFA387-126D-4D3F-89E3-9468F1D9C724}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
