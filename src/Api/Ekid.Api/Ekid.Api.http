@@ -1,0 +1,6 @@
+@Ekid.Api_HostAddress = http://localhost:5185
+
+GET {{Ekid.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

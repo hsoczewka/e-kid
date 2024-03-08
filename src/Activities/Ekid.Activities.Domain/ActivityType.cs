@@ -1,4 +1,4 @@
-namespace Ekid.Domain.Activities;
+namespace Ekid.Activities.Domain;
 
 public record ActivityType(string Value)
 {

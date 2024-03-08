@@ -3,9 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Api", "src\Ekid.Api\Ekid.Api.csproj", "{D1299017-1202-4DEE-A5DE-210468B7F96E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Domain", "src\Ekid.Domain\Ekid.Domain.csproj", "{EBDD985D-C71B-47CA-8587-ACB54FCBA5BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{0AFA23CE-FDA3-4E83-BF37-A119A929CF81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Api", "src\Api\Ekid.Api\Ekid.Api.csproj", "{C1062D75-6FF5-4D0C-A025-2B61670FC424}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Activities", "Activities", "{3B7944D7-3B11-4BAC-BEF2-C154405F5244}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Activities.Domain", "src\Activities\Ekid.Activities.Domain\Ekid.Activities.Domain.csproj", "{0996911A-5158-441A-B609-698C039FB634}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Activities.Contracts", "src\Activities\Ekid.Activities.Contracts\Ekid.Activities.Contracts.csproj", "{C99CE5B7-F149-49EA-8AE0-5891396F6DA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Activities.Api", "src\Activities\Ekid.Activities.Api\Ekid.Activities.Api.csproj", "{0B49993E-D8CB-4B21-B6ED-2B25EA36F73E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +26,31 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D1299017-1202-4DEE-A5DE-210468B7F96E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1299017-1202-4DEE-A5DE-210468B7F96E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1299017-1202-4DEE-A5DE-210468B7F96E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1299017-1202-4DEE-A5DE-210468B7F96E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBDD985D-C71B-47CA-8587-ACB54FCBA5BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EBDD985D-C71B-47CA-8587-ACB54FCBA5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBDD985D-C71B-47CA-8587-ACB54FCBA5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBDD985D-C71B-47CA-8587-ACB54FCBA5BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1062D75-6FF5-4D0C-A025-2B61670FC424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1062D75-6FF5-4D0C-A025-2B61670FC424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1062D75-6FF5-4D0C-A025-2B61670FC424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1062D75-6FF5-4D0C-A025-2B61670FC424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0996911A-5158-441A-B609-698C039FB634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0996911A-5158-441A-B609-698C039FB634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0996911A-5158-441A-B609-698C039FB634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0996911A-5158-441A-B609-698C039FB634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99CE5B7-F149-49EA-8AE0-5891396F6DA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99CE5B7-F149-49EA-8AE0-5891396F6DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99CE5B7-F149-49EA-8AE0-5891396F6DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99CE5B7-F149-49EA-8AE0-5891396F6DA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B49993E-D8CB-4B21-B6ED-2B25EA36F73E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B49993E-D8CB-4B21-B6ED-2B25EA36F73E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B49993E-D8CB-4B21-B6ED-2B25EA36F73E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B49993E-D8CB-4B21-B6ED-2B25EA36F73E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C1062D75-6FF5-4D0C-A025-2B61670FC424} = {0AFA23CE-FDA3-4E83-BF37-A119A929CF81}
+		{0996911A-5158-441A-B609-698C039FB634} = {3B7944D7-3B11-4BAC-BEF2-C154405F5244}
+		{C99CE5B7-F149-49EA-8AE0-5891396F6DA4} = {3B7944D7-3B11-4BAC-BEF2-C154405F5244}
+		{0B49993E-D8CB-4B21-B6ED-2B25EA36F73E} = {3B7944D7-3B11-4BAC-BEF2-C154405F5244}
 	EndGlobalSection
 EndGlobal
