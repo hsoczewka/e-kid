@@ -1,4 +1,4 @@
-namespace Ekid.Activities.Domain;
+namespace Ekid.Activities;
 
 public class Activity
 {
