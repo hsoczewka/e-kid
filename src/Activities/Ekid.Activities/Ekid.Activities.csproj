@@ -7,4 +7,12 @@
         <RootNamespace>Ekid.Activities</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Ekid.Activities.Contracts\Ekid.Activities.Contracts.csproj" />
+    </ItemGroup>
+
 </Project>
