@@ -1,6 +1,13 @@
 @Ekid.Api_HostAddress = http://localhost:5185
 
-POST {{Ekid.Api_HostAddress}}/api/activities/
+POST {{Ekid.Api_HostAddress}}/api/activities
 Accept: application/json
+
+{
+  "description": "something",
+  "type": "Diagnosis",
+  "duration": 45,
+  "price": 120
+}
 
 ###
