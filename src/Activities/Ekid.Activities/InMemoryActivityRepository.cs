@@ -16,4 +16,7 @@ public class InMemoryActivityRepository
 
     public Task<Activity?> GetAsync(Guid id) 
         => Task.FromResult(_activities.FirstOrDefault(x => x.Id == id));
+
+    public Task<List<Activity>> GetAllAsync()
+        => Task.FromResult(_activities.ToList());
 }

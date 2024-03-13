@@ -1,7 +1,8 @@
 @Ekid.Api_HostAddress = http://localhost:5185
 
+### Create activity
 POST {{Ekid.Api_HostAddress}}/api/activities
-Accept: application/json
+Content-Type: application/json
 
 {
   "description": "something",
@@ -10,4 +11,10 @@ Accept: application/json
   "price": 120
 }
 
-###
+> {% client.global.set("activityId", response.body); %}
+
+### Get activity
+GET {{Ekid.Api_HostAddress}}/api/activities/{{activityId}}
+
+### Get all activities
+GET {{Ekid.Api_HostAddress}}/api/activities

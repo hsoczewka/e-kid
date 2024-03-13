@@ -1,4 +1,5 @@
 using Ekid.Activities.CreateActivity;
+using Ekid.Activities.GetActivities;
 using Ekid.Activities.GetActivity;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,5 +14,6 @@ public static class Bootstrap
     public static IEndpointRouteBuilder UseActivitiesEndpoints(this IEndpointRouteBuilder endpoints)
         => endpoints
             .UseCreateActivityEndpoint()
-            .UseGetActivityEndpoint();
+            .UseGetActivityEndpoint()
+            .UseGetActivitiesEndpoint();
 }
