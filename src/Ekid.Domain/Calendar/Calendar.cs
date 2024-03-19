@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices.JavaScript;
+
 namespace Ekid.Domain.Calendar;
 
 public class Calendar
@@ -23,6 +25,20 @@ public class Calendar
                                          && x.EmployeeId == employeeId
                                          && x.StartTime >= startDate
                                          && x.EndTime <= endDate).ToList();
+    }
+
+    public IReadOnlyCollection<Appointment> GetEmployeeAppointments(Guid employeeId, DateTime startDate, DateTime endDate)
+    {
+        return _appointments.Where(x => x.EmployeeId == employeeId
+                                        && x.StartTime >= startDate
+                                        && x.EndTime <= endDate).ToList();
+    }
+    
+    public IReadOnlyCollection<Appointment> GetAttendeeAppointments(Guid attendeeId, DateTime startDate, DateTime endDate)
+    {
+        return _appointments.Where(x => x.AttendeeId == attendeeId
+                                        && x.StartTime >= startDate
+                                        && x.EndTime <= endDate).ToList();
     }
 
     private bool IsSlotAvailable(DateTime startTime, DateTime endTime, Guid activityId) 
