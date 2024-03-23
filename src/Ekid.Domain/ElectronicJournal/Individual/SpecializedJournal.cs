@@ -1,8 +1,8 @@
-namespace Ekid.Domain.ElectronicJournal;
+namespace Ekid.Domain.ElectronicJournal.Individual;
 
-public class IndividualJournal
+public class SpecializedJournal
 {
-    public IndividualJournal(Guid attendeeId, string description, string opinionNumber, string diagnosisResult)
+    public SpecializedJournal(Guid attendeeId, string description, string opinionNumber, string diagnosisResult)
     {
         AttendeeId = attendeeId;
         Description = description;
