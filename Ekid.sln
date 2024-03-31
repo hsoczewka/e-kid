@@ -21,6 +21,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Infrastructure", "src\Infrastructure\Ekid.Infrastructure\Ekid.Infrastructure.csproj", "{7B3716C1-7711-431B-80AD-3B6E19682852}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResourcesManagement", "ResourcesManagement", "{F47ACDCD-F981-49E6-8ECD-D02A55161B52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.ResourcesManagement", "src\ResourcesManagement\Ekid.ResourcesManagement\Ekid.ResourcesManagement.csproj", "{9982663A-FF22-4FD5-8145-9F63FFF4FF8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.ResourcesManagement.Api", "src\ResourcesManagement\Ekid.ResourcesManagement.Api\Ekid.ResourcesManagement.Api.csproj", "{195A3EC4-2198-43A4-B434-CF027F7B23F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.ResourcesManagement.Contracts", "src\ResourcesManagement\Ekid.ResourcesManagement.Contracts\Ekid.ResourcesManagement.Contracts.csproj", "{E93EAB85-7262-4874-BDD8-4F161B7143CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +62,18 @@ Global
 		{7B3716C1-7711-431B-80AD-3B6E19682852}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B3716C1-7711-431B-80AD-3B6E19682852}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B3716C1-7711-431B-80AD-3B6E19682852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9982663A-FF22-4FD5-8145-9F63FFF4FF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9982663A-FF22-4FD5-8145-9F63FFF4FF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9982663A-FF22-4FD5-8145-9F63FFF4FF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9982663A-FF22-4FD5-8145-9F63FFF4FF8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{195A3EC4-2198-43A4-B434-CF027F7B23F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{195A3EC4-2198-43A4-B434-CF027F7B23F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{195A3EC4-2198-43A4-B434-CF027F7B23F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{195A3EC4-2198-43A4-B434-CF027F7B23F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E93EAB85-7262-4874-BDD8-4F161B7143CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E93EAB85-7262-4874-BDD8-4F161B7143CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E93EAB85-7262-4874-BDD8-4F161B7143CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E93EAB85-7262-4874-BDD8-4F161B7143CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C1062D75-6FF5-4D0C-A025-2B61670FC424} = {0AFA23CE-FDA3-4E83-BF37-A119A929CF81}
@@ -61,5 +81,8 @@ Global
 		{C99CE5B7-F149-49EA-8AE0-5891396F6DA4} = {3B7944D7-3B11-4BAC-BEF2-C154405F5244}
 		{0B49993E-D8CB-4B21-B6ED-2B25EA36F73E} = {3B7944D7-3B11-4BAC-BEF2-C154405F5244}
 		{7B3716C1-7711-431B-80AD-3B6E19682852} = {A589EF2A-0F56-4F32-9B90-8C92DDC7D774}
+		{9982663A-FF22-4FD5-8145-9F63FFF4FF8C} = {F47ACDCD-F981-49E6-8ECD-D02A55161B52}
+		{195A3EC4-2198-43A4-B434-CF027F7B23F1} = {F47ACDCD-F981-49E6-8ECD-D02A55161B52}
+		{E93EAB85-7262-4874-BDD8-4F161B7143CB} = {F47ACDCD-F981-49E6-8ECD-D02A55161B52}
 	EndGlobalSection
 EndGlobal

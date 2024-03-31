@@ -41,7 +41,7 @@ public class Calendar
                                         && x.EndTime <= endDate).ToList();
     }
 
-    private bool IsSlotAvailable(DateTime startTime, DateTime endTime, Guid activityId) 
+    private bool IsSlotAvailable(DateTime startTime, DateTime endTime, Guid activityId)
     {
         foreach (var appointment in _appointments.Where(x => x.ActivityId == activityId)) 
         {

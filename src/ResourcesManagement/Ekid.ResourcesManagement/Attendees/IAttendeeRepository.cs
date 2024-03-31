@@ -1,4 +1,4 @@
-namespace Ekid.Domain.Attendees;
+namespace Ekid.ResourcesManagement.Attendees;
 
 public interface IAttendeeRepository
 {

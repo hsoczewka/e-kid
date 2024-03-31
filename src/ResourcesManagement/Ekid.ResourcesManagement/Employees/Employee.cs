@@ -1,4 +1,4 @@
-namespace Ekid.Domain.Employees;
+namespace Ekid.ResourcesManagement.Employees;
 
 public class Employee
 {

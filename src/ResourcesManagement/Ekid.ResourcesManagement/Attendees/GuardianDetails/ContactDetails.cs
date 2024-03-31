@@ -1,4 +1,4 @@
-namespace Ekid.Domain.Attendees.GuardianDetails;
+namespace Ekid.ResourcesManagement.Attendees.GuardianDetails;
 
 //Parent contact details
 public class ContactDetails
