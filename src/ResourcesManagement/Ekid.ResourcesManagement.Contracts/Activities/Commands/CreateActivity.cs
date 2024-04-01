@@ -1,6 +1,6 @@
 using Ekid.Infrastructure.Messaging;
 
-namespace Ekid.Activities.Contracts.Commands;
+namespace Ekid.ResourcesManagement.Contracts.Activities.Commands;
 
 public class CreateActivity : ICommand
 {

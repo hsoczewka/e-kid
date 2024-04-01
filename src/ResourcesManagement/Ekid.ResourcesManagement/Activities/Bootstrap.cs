@@ -1,10 +1,10 @@
-using Ekid.Activities.CreateActivity;
-using Ekid.Activities.GetActivities;
-using Ekid.Activities.GetActivity;
+using Ekid.ResourcesManagement.Activities.CreateActivity;
+using Ekid.ResourcesManagement.Activities.GetActivities;
+using Ekid.ResourcesManagement.Activities.GetActivity;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ekid.Activities;
+namespace Ekid.ResourcesManagement.Activities;
 
 public static class Bootstrap
 {

@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Activities\Ekid.Activities\Ekid.Activities.csproj" />
+      <ProjectReference Include="..\..\ResourcesManagement\Ekid.ResourcesManagement\Ekid.ResourcesManagement.csproj" />
     </ItemGroup>
 
 </Project>

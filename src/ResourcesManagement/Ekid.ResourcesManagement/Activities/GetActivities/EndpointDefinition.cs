@@ -4,24 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using static Microsoft.AspNetCore.Http.Results;
 
-namespace Ekid.Activities.GetActivity;
+namespace Ekid.ResourcesManagement.Activities.GetActivities;
 
 internal static class EndpointDefinition
 {
-    internal static IEndpointRouteBuilder UseGetActivityEndpoint(this IEndpointRouteBuilder endpoints)
+    internal static IEndpointRouteBuilder UseGetActivitiesEndpoint(this IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet(
-                pattern: "api/activities/{id:guid}",
+                pattern: "api/activities",
                 handler: async (
                         [FromServices] InMemoryActivityRepository repository,
-                        Guid id,
                         CancellationToken ct)
                     =>
                 {
-                    var result = await repository.GetAsync(id);
-                    return result != null ? Ok(result) : NotFound();
+                    var results = await repository.GetAllAsync();
+                    return results.Any() ? Ok(results) : NotFound();
                 })
-            .Produces<Activity?>()
+            .Produces<List<Activity>>()
             .Produces(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest);
 

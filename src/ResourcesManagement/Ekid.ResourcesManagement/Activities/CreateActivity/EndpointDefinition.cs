@@ -1,12 +1,10 @@
-using Ekid.Activities.Contracts.Commands;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using static Microsoft.AspNetCore.Http.Results;
 
-namespace Ekid.Activities.CreateActivity;
+namespace Ekid.ResourcesManagement.Activities.CreateActivity;
 
 internal static class EndpointDefinition
 {
@@ -16,7 +14,7 @@ internal static class EndpointDefinition
                 pattern: "api/activities",
                 handler: async (
                         [FromServices] InMemoryActivityRepository repository,
-                        Contracts.Commands.CreateActivity command,
+                        Contracts.Activities.Commands.CreateActivity command,
                         CancellationToken ct)
                     =>
                 {

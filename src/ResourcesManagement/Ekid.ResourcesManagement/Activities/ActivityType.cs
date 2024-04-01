@@ -1,4 +1,4 @@
-namespace Ekid.Activities;
+namespace Ekid.ResourcesManagement.Activities;
 
 public record ActivityType(string Value)
 {

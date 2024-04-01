@@ -1,4 +1,4 @@
-using Ekid.Activities;
+using Ekid.ResourcesManagement.Activities;
 
 var builder = WebApplication.CreateBuilder(args);
 
