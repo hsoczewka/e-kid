@@ -14,8 +14,4 @@
       <ProjectReference Include="..\Ekid.ResourcesManagement.Contracts\Ekid.ResourcesManagement.Contracts.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Ekid.ResourcesManagement.Contracts\Ekid.ResourcesManagement.Contracts.csproj" />
-    </ItemGroup>
-
 </Project>

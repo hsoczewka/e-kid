@@ -1,4 +1,4 @@
-namespace Ekid.ResourcesManagement.Activities;
+namespace Ekid.ResourcesManagement.Activities.DAL;
 
 public class InMemoryActivityRepository
 {
