@@ -14,4 +14,8 @@
       <ProjectReference Include="..\Ekid.ResourcesManagement.Contracts\Ekid.ResourcesManagement.Contracts.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Activities\DAL\StorageConfiguration\" />
+    </ItemGroup>
+
 </Project>

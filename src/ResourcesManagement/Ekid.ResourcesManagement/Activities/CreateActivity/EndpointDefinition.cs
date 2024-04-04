@@ -1,3 +1,4 @@
+using Ekid.Infrastructure.Primitives;
 using Ekid.ResourcesManagement.Activities.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +21,7 @@ internal static class EndpointDefinition
                     =>
                 {
                     var activity = new Activity(Guid.NewGuid(), command.Description, ActivityType.Diagnosis,
-                        TimeSpan.FromMinutes(command.Duration), command.Price);
+                        TimeSpan.FromMinutes(command.Duration), new Money(command.Price, "PLN"));
                     await repository.SaveAsync(activity);
                     
                     return Created($"/api/activities/{activity.Id}", activity.Id);
