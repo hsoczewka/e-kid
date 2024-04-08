@@ -12,4 +12,6 @@ public class AttendeeActivities
     public Guid Id { get; }
     public Guid AttendeeId { get; }
     public List<Guid> Activities { get; }
+    
+    //TODO include individual price model here
 }
