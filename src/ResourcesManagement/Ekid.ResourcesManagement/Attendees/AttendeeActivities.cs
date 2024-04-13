@@ -14,7 +14,7 @@ public class AttendeeActivities
     public Guid AttendeeId { get; }
     public List<Guid> Activities { get; }
     
-    public List<IndividualPrice> IndividualPrices { get; }
+    public List<IndividualPrice> IndividualPrices { get; } //find better way to override activity price
     
     //TODO include individual price model here
 }

@@ -1,4 +1,5 @@
 using Ekid.Infrastructure.Primitives;
+using Ekid.ResourcesManagement.Attendees;
 
 namespace Ekid.ResourcesManagement.Activities;
 
