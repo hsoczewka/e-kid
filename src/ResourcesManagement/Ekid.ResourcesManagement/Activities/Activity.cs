@@ -4,18 +4,18 @@ namespace Ekid.ResourcesManagement.Activities;
 
 public class Activity
 {
-    public Activity(Guid id, string description, ActivityType type, TimeSpan duration, Money price)
+    public Activity(Guid id, string description, ActivityType type, TimeSpan duration, ICollection<ActivityPrice> prices)
     {
         Id = id;
         Description = description;
         Type = type;
         Duration = duration;
-        Price = price;
+        Prices = prices;
     }
 
     public Guid Id { get; }
     public string Description { get; }
     public ActivityType Type { get; }
     public TimeSpan Duration { get; }
-    public Money Price { get; }
+    public ICollection<ActivityPrice> Prices { get; }
 }
