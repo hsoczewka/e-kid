@@ -3,6 +3,8 @@ using Ekid.ResourcesManagement.Attendees;
 
 namespace Ekid.ResourcesManagement.Activities;
 
+
+//change name to PricePeriod ??
 public class ActivityPrice
 {
     public ActivityPrice(Guid id, Guid activityId, Money price, DateTime validFrom, DateTime? validTo)
