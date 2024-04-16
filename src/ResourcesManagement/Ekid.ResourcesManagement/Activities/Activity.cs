@@ -4,7 +4,11 @@ namespace Ekid.ResourcesManagement.Activities;
 
 public class Activity
 {
-    public Activity(Guid id, string description, ActivityType type, TimeSpan duration, ICollection<ActivityPrice> prices)
+    public Activity(Guid id,
+        string description,
+        ActivityType type,
+        TimeSpan duration,
+        IReadOnlyCollection<ProductPrice> prices)
     {
         Id = id;
         Description = description;
@@ -17,5 +21,5 @@ public class Activity
     public string Description { get; }
     public ActivityType Type { get; }
     public TimeSpan Duration { get; }
-    public ICollection<ActivityPrice> Prices { get; }
+    public IReadOnlyCollection<ProductPrice> Prices { get; }
 }
