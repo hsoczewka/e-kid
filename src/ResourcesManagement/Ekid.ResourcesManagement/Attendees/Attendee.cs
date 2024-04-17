@@ -1,21 +1,18 @@
+using Ekid.ResourcesManagement.Activities;
+
 namespace Ekid.ResourcesManagement.Attendees;
 
 public class Attendee
 {
-    public Attendee(Guid id, string firstName, string lastName, string address, string birthPlace, DateTime birtDateTime)
+    public Attendee(Guid id, AttendeeDetails details, IEnumerable<Activity> activities)
     {
         Id = id;
-        FirstName = firstName;
-        LastName = lastName;
-        Address = address;
-        BirthPlace = birthPlace;
-        BirtDateTime = birtDateTime;
+        Details = details;
+        Activities = activities;
     }
 
     public Guid Id { get; }
-    public string FirstName { get; }
-    public string LastName { get; }
-    public string Address { get; }
-    public string BirthPlace { get; }
-    public DateTime BirtDateTime { get; }
+    //TODO ContactId => ContactDetails
+    public AttendeeDetails Details { get; }
+    public IEnumerable<Activity> Activities { get; }
 }
