@@ -4,7 +4,7 @@ namespace Ekid.ResourcesManagement.Attendees;
 
 public class Attendee
 {
-    public Attendee(Guid id, AttendeeDetails details, IEnumerable<Activity> activities)
+    public Attendee(Guid id, AttendeeDetails details, IEnumerable<AttendeeActivity> activities)
     {
         Id = id;
         Details = details;
@@ -14,5 +14,5 @@ public class Attendee
     public Guid Id { get; }
     //TODO ContactId => ContactDetails
     public AttendeeDetails Details { get; }
-    public IEnumerable<Activity> Activities { get; }
+    public IEnumerable<AttendeeActivity> Activities { get; }
 }
