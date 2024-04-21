@@ -1,6 +1,8 @@
+using Ekid.Infrastructure.Tenant;
+
 namespace Ekid.Infrastructure.CallContext;
 
-public class CallContext
+public class CallContext : ITenant
 {
     public CallContext(Guid tenantId, Guid correlationId, Guid userId)
     {
