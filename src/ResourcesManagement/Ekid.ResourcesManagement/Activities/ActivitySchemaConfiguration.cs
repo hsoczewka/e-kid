@@ -17,15 +17,7 @@ public class ActivitySchemaConfiguration : IEntityTypeConfiguration<Activity>
         builder.Property(x => x.Duration).HasConversion(
             v => v.Minutes,
             v => TimeSpan.FromMinutes(v));
-        builder.OwnsMany<ProductPrice>("Price", priceBuilder =>
-        {
-            priceBuilder.Property(x => x.ValidFrom).IsRequired();
-            priceBuilder.Property(x => x.ValidTo).IsRequired(false);
-            priceBuilder.OwnsOne(x => x.Price, moneyBuilder =>
-            {
-                moneyBuilder.Property(x => x.Amount).IsRequired();
-                moneyBuilder.Property(x => x.Currency).IsRequired();
-            });
-        });
+        builder.Property(x => x.Prices)
+            .HasColumnType("jsonb");
     }
 }

@@ -10,7 +10,7 @@ public class Activity : ITenant
         string description,
         ActivityType type,
         TimeSpan duration,
-        IEnumerable<ProductPrice> prices)
+        Prices prices)
     {
         Id = id;
         TenantId = tenantId;
@@ -26,6 +26,6 @@ public class Activity : ITenant
     public string Description { get; }
     public ActivityType Type { get; }
     public TimeSpan Duration { get; }
-    public IEnumerable<ProductPrice> Prices { get; }
+    public Prices Prices { get; }
     
 }
