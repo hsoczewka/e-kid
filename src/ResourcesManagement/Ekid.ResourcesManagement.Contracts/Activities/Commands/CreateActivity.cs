@@ -4,17 +4,19 @@ namespace Ekid.ResourcesManagement.Contracts.Activities.Commands;
 
 public class CreateActivity : ICommand
 {
-    public CreateActivity(string description, string type, int duration, decimal price)
+    public CreateActivity(string description, string type, int duration, decimal priceAmount, string priceCurrency)
     {
         Description = description;
         Type = type;
         Duration = duration;
-        Price = price;
+        PriceAmount = priceAmount;
+        PriceCurrency = priceCurrency;
     }
 
     public string Description { get; }
     public string Type { get; }
     public int Duration { get; }
-    public decimal Price { get; }
+    public decimal PriceAmount { get; }
+    public string PriceCurrency { get; }
     
 }
