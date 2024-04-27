@@ -11,7 +11,7 @@ public class CallContext : ITenant
         UserId = userId;
     }
 
-    public Guid TenantId { get; }
-    public Guid CorrelationId { get; }
-    public Guid UserId { get; }
+    public Guid TenantId { get; internal set; }
+    public Guid CorrelationId { get; internal set; }
+    public Guid UserId { get; internal set; }
 }
