@@ -1,3 +1,4 @@
+using Ekid.Infrastructure.HttpContext;
 using Microsoft.AspNetCore.Http;
 
 namespace Ekid.Infrastructure.CallContext;
@@ -10,10 +11,11 @@ internal class CallContextMiddleware
 
     public CallContextMiddleware(RequestDelegate next) => this.next = next;
 
-    public async Task Invoke(HttpContext httpContext, CallContext callContext)
+    public async Task Invoke(Microsoft.AspNetCore.Http.HttpContext httpContext, CallContext callContext)
     {
         var user = httpContext.User;
-        
+
+        callContext.TenantId = httpContext.ParseGuid(TenantIdHeader);
         //TODO check if token is valid
         //set tenant id from header value
         
