@@ -3,6 +3,7 @@ namespace Ekid.Identity.Users;
 public class User
 {
     public User(Guid id,
+        Guid tenantId,
         string firstName,
         string lastName,
         string login,
@@ -12,6 +13,7 @@ public class User
         bool isActive)
     {
         Id = id;
+        TenantId = tenantId;
         FirstName = firstName;
         LastName = lastName;
         Login = login;
@@ -22,6 +24,7 @@ public class User
     }
 
     public Guid Id { get; }
+    public Guid TenantId { get; }
     public string FirstName { get; }
     public string LastName { get; }
     public string Login { get; }
