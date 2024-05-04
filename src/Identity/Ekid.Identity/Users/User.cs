@@ -9,7 +9,7 @@ public class User
         string login,
         string password,
         string email,
-        List<UserRole> roles,
+        UserRole role,
         bool isActive)
     {
         Id = id;
@@ -19,7 +19,7 @@ public class User
         Login = login;
         Password = password;
         Email = email;
-        Roles = roles;
+        Role = role;
         IsActive = isActive;
     }
 
@@ -30,6 +30,6 @@ public class User
     public string Login { get; }
     public string Password { get; }
     public string Email { get; }
-    public List<UserRole> Roles { get; }
+    public UserRole Role { get; }
     public bool IsActive { get; }
 }

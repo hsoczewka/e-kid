@@ -1,4 +1,6 @@
-namespace Ekid.Infrastructure.Identity.Authorization;
+using Ekid.Infrastructure.Identity.Authorization;
+
+namespace Ekid.ResourcesManagement.Contracts.Security;
 
 public class Permissions
 {

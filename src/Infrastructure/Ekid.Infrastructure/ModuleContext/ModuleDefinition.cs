@@ -9,4 +9,6 @@ public abstract class ModuleDefinition
     public abstract string RoutePrefix { get; }
     public abstract void AddModuleComponents(IServiceCollection services, IConfiguration configuration);
     public abstract void MapEndpoints(IEndpointRouteBuilder endpoints);
+    
+    //TODO abstraction for permission registration
 }
