@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{22
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Identity", "src\Identity\Ekid.Identity\Ekid.Identity.csproj", "{7A4C047F-83DF-4F00-B48D-4E6A527ADBCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Infrastructure.Tests", "src\Infrastructure\Ekid.Infrastructure.Tests\Ekid.Infrastructure.Tests.csproj", "{1CE7C370-4E56-41F1-9A4D-6FE3376E65E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{7A4C047F-83DF-4F00-B48D-4E6A527ADBCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A4C047F-83DF-4F00-B48D-4E6A527ADBCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A4C047F-83DF-4F00-B48D-4E6A527ADBCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE7C370-4E56-41F1-9A4D-6FE3376E65E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE7C370-4E56-41F1-9A4D-6FE3376E65E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE7C370-4E56-41F1-9A4D-6FE3376E65E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE7C370-4E56-41F1-9A4D-6FE3376E65E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C1062D75-6FF5-4D0C-A025-2B61670FC424} = {0AFA23CE-FDA3-4E83-BF37-A119A929CF81}
@@ -70,5 +76,6 @@ Global
 		{195A3EC4-2198-43A4-B434-CF027F7B23F1} = {F47ACDCD-F981-49E6-8ECD-D02A55161B52}
 		{E93EAB85-7262-4874-BDD8-4F161B7143CB} = {F47ACDCD-F981-49E6-8ECD-D02A55161B52}
 		{7A4C047F-83DF-4F00-B48D-4E6A527ADBCC} = {22D0D330-EE79-44AA-B1BE-97F30CCC99CF}
+		{1CE7C370-4E56-41F1-9A4D-6FE3376E65E8} = {A589EF2A-0F56-4F32-9B90-8C92DDC7D774}
 	EndGlobalSection
 EndGlobal

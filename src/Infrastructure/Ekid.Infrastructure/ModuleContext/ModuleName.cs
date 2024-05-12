@@ -18,7 +18,7 @@ public class ModuleName
         }
 
         return type.Namespace.StartsWith(Prefix)
-            ? new ModuleName(type.Namespace.Split(".")[2].ToLowerInvariant())
+            ? new ModuleName(type.Namespace.Split(".")[1].ToLowerInvariant())
             : new ModuleName(string.Empty);
     }
 }
