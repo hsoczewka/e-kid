@@ -18,4 +18,6 @@ public class ResourcesManagementModule : ModuleDefinition
     {
         throw new NotImplementedException();
     }
+
+    public override ModuleName Name => ModuleName.Of(GetType());
 }
