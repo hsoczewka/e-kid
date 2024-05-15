@@ -1,22 +1,25 @@
 using Ekid.Infrastructure.Attributes;
 using Ekid.Infrastructure.Messaging;
+using Ekid.Infrastructure.ModuleContext;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Ekid.Infrastructure.UnitOfWork;
 
 [ExcludeFromAutoRegistration]
-public class TransactionalCommandHandlerDecorator<T> : ICommandHandler<T> where T : class, ICommand
+public class TransactionalCommandHandlerDecorator<T>(ICommandHandler<T> handler, IServiceProvider serviceProvider)
+    : ICommandHandler<T>
+    where T : class, ICommand
 {
-    private readonly ICommandHandler<T> _handler;
-    private readonly IServiceProvider _serviceProvider;
-
-    public TransactionalCommandHandlerDecorator(ICommandHandler<T> handler, IServiceProvider serviceProvider)
+    public async Task HandleAsync(T command)
     {
-        _handler = handler;
-        _serviceProvider = serviceProvider;
-    }
+        var moduleName = ModuleName.Of(typeof(T));
+        var unitOfWork = serviceProvider.GetKeyedService<IUnitOfWork>(moduleName);
+        if (unitOfWork is null)
+        {
+            await handler.HandleAsync(command);
+            return;
+        }
 
-    public Task HandleAsync(T command)
-    {
-        throw new NotImplementedException();
+        await unitOfWork.ExecuteAsync(() => handler.HandleAsync(command));
     }
 }
