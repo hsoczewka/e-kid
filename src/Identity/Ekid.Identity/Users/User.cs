@@ -10,7 +10,6 @@ public class User
         string password,
         string email,
         UserRole role,
-        List<Guid> permissions,
         bool isActive)
     {
         Id = id;
@@ -21,7 +20,6 @@ public class User
         Password = password;
         Email = email;
         Role = role;
-        Permissions = permissions;
         IsActive = isActive;
     }
 
@@ -33,6 +31,5 @@ public class User
     public string Password { get; }
     public string Email { get; }
     public UserRole Role { get; }
-    public List<Guid> Permissions { get; }
     public bool IsActive { get; }
 }
