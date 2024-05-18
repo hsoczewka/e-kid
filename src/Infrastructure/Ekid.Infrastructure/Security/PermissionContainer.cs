@@ -1,13 +1,17 @@
 namespace Ekid.Infrastructure.Security;
 
-public abstract class PermissionContainer
+public class PermissionContainer
 {
-    private readonly List<Permission> _permissions = [];
-    
-    protected void Configure(IEnumerable<Permission> permissions)
-    {
-        _permissions.AddRange(permissions);
-    }
+    private readonly List<Permission> _permissions = new();
 
-    public abstract void RegisterPermissions();
+    public IReadOnlyCollection<Permission> Permissions => _permissions;
+    
+    internal PermissionContainer() { }
+    
+    public PermissionContainer Register(IEnumerable<Permission> permissions)
+    {
+        //TODO validation of already existing permission
+        _permissions.AddRange(permissions);
+        return this;
+    }
 }
