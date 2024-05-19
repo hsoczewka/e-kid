@@ -1,3 +1,4 @@
+using Ekid.Infrastructure.Security;
 using Ekid.ResourcesManagement.Activities;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddActivitiesComponents();
 
 var app = builder.Build();
+
+app.Services.RegisterAllPermissions();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

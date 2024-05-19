@@ -1,5 +1,6 @@
 using System.Reflection;
 using Ekid.Infrastructure.Messaging;
+using Ekid.Infrastructure.Security;
 using Ekid.Infrastructure.UnitOfWork;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,5 +12,6 @@ public static class Bootstrap
     {
         services.AddCommandQueryDispatcherWithHandlers(assemblies);
         services.AddTransactionalHandlers();
+        services.AddPermissionContainer();
     }
 }
