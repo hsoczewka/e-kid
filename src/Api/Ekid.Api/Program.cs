@@ -1,5 +1,5 @@
 using Ekid.Infrastructure.Security;
-using Ekid.ResourcesManagement.Activities;
+using Ekid.Resources.Activities;
 
 var builder = WebApplication.CreateBuilder(args);
 
