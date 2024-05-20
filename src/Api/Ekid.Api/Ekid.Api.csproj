@@ -13,6 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Identity\Ekid.Identity.Api\Ekid.Identity.Api.csproj" />
+      <ProjectReference Include="..\..\ResourcesManagement\Ekid.Resources.Api\Ekid.Resources.Api.csproj" />
       <ProjectReference Include="..\..\ResourcesManagement\Ekid.Resources\Ekid.Resources.csproj" />
     </ItemGroup>
 

@@ -14,7 +14,7 @@ internal static class EndpointDefinition
     internal static IEndpointRouteBuilder UseActivityEndpoints(this IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost(
-                pattern: "api/activities",
+                pattern: "activities",
                 handler: async (
                         [FromServices] InMemoryActivityRepository repository,
                         CreateActivity command,
@@ -32,7 +32,7 @@ internal static class EndpointDefinition
             .Produces(StatusCodes.Status400BadRequest);
         
         endpoints.MapGet(
-                pattern: "api/activities",
+                pattern: "activities",
                 handler: async (
                         [FromServices] InMemoryActivityRepository repository,
                         CancellationToken ct)
@@ -45,20 +45,20 @@ internal static class EndpointDefinition
             .Produces(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest);
         
-        endpoints.MapGet(
-                pattern: "api/activities/{id:guid}",
+        /*endpoints.MapGet(
+                pattern: "api/activities/{activityId:guid}",
                 handler: async (
                         [FromServices] InMemoryActivityRepository repository,
-                        Guid id,
+                        [FromRoute] Guid activityId,
                         CancellationToken ct)
                     =>
                 {
-                    var result = await repository.GetAsync(id);
+                    var result = await repository.GetAsync(activityId);
                     return result != null ? Ok(result) : NotFound();
                 })
             .Produces<Activity?>()
             .Produces(StatusCodes.Status201Created)
-            .Produces(StatusCodes.Status400BadRequest);
+            .Produces(StatusCodes.Status400BadRequest);*/
 
         return endpoints;
     }

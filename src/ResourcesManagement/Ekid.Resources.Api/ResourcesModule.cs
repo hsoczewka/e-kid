@@ -1,22 +1,26 @@
+using System.Diagnostics;
 using Ekid.Infrastructure.ModuleContext;
+using Ekid.Resources.Activities;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Ekid.Resources.Api;
 
-public class ResourcesManagementModule : ModuleDefinition
+public class ResourcesModule : ModuleDefinition
 {
     public override string RoutePrefix => "/resources";
     
     public override void AddModuleComponents(IServiceCollection services, IConfiguration configuration)
     {
-        throw new NotImplementedException();
+        services.AddActivitiesComponents();
     }
 
     public override void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        throw new NotImplementedException();
+        var activities = endpoints.MapGroup(RoutePrefix);
+        activities.UseActivitiesEndpoints();
     }
 
     public override ModuleName Name => ModuleName.Of(GetType());

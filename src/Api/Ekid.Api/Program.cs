@@ -1,15 +1,24 @@
+using Ekid.Api;
+using Ekid.Identity.Api;
+using Ekid.Infrastructure.ModuleContext;
 using Ekid.Infrastructure.Security;
-using Ekid.Resources.Activities;
+using Ekid.Resources.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Modules.RegisterModule<IdentityModule>();
+Modules.RegisterModule<ResourcesModule>();
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddActivitiesComponents();
+builder.Services.AddApplicationComponents(builder.Configuration);
 
 var app = builder.Build();
+
+//TODO ensure db created
 
 app.Services.RegisterAllPermissions();
 
@@ -21,12 +30,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-//app.MapControllers();
+app.MapControllers();
 app.UseRouting()
     .UseEndpoints(endpoints =>
 {
-    endpoints.UseActivitiesEndpoints();
-
+    endpoints.UseModuleEndpoints();
 });
 
 app.Run();
