@@ -1,3 +1,5 @@
+using System.Reflection;
+using Ekid.Infrastructure.Security;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,5 +42,4 @@ public static class Modules
             module.MapEndpoints(endpointRouteBuilder);
         }
     }
-    
 }

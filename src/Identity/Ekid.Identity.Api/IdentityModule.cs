@@ -1,4 +1,5 @@
 
+using System.Reflection;
 using Ekid.Identity.Permissions;
 using Ekid.Infrastructure.ModuleContext;
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,6 @@ public class IdentityModule : ModuleDefinition
         var group = endpoints.MapGroup(RoutePrefix);
         group.UsePermissionsEndpoints();
     }
-
+    
     public override ModuleName Name => ModuleName.Of(GetType());
 }

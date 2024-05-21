@@ -19,7 +19,6 @@ builder.Services.AddApplicationComponents(builder.Configuration);
 var app = builder.Build();
 
 //TODO ensure db created
-
 app.Services.RegisterAllPermissions();
 
 // Configure the HTTP request pipeline.

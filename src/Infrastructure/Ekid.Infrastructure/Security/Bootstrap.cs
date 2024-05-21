@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Ekid.Infrastructure.Security;
@@ -11,8 +12,6 @@ public static class Bootstrap
 
     public static void RegisterAllPermissions(this IServiceProvider serviceProvider)
     {
-        // TODO exclude test permission on non development env
-        // or register for given assemblies
         var registries = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes())
             .Where(type => typeof(IPermissionRegistry).IsAssignableFrom(type))
             .Where(type => !type.IsAbstract)
