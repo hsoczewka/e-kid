@@ -1,7 +1,10 @@
+using Ekid.Infrastructure.Identity.Authorization;
 using Ekid.Infrastructure.Messaging;
+using Ekid.Resources.Contracts.Security;
 
 namespace Ekid.Resources.Contracts.Activities.Commands;
 
+[HasPermission(Permissions.ManageActivityId)]
 public class CreateActivity : ICommand
 {
     public CreateActivity(string description, string type, int duration, decimal priceAmount, string priceCurrency)
