@@ -2,6 +2,7 @@
 using System.Reflection;
 using Ekid.Identity.Permissions;
 using Ekid.Infrastructure.ModuleContext;
+using Ekid.Infrastructure.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ public class IdentityModule : ModuleDefinition
     public override void AddModuleComponents(IServiceCollection services, IConfiguration configuration)
     {
         services.AddPermissionsComponents();
+        services.AddSingleton<IPermissionRegistry, Contracts.Security.Permissions>();
     }
 
     public override void MapEndpoints(IEndpointRouteBuilder endpoints)
