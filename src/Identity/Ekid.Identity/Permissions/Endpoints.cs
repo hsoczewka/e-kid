@@ -1,3 +1,4 @@
+using Ekid.Infrastructure.Identity.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ internal static class Endpoints
     {
         endpoints.MapGet(
                 pattern: Route,
-                handler: async (
+                handler: [HasPermission(Contracts.Security.Permissions.ViewPermissionsId)] async (
                         [FromServices] IPermissionsProvider permissionsProvider,
                         CancellationToken cancellationToken)
                     =>
@@ -24,6 +25,8 @@ internal static class Endpoints
             .Produces<List<Infrastructure.Security.Permission>>()
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest);
+        
+        //TODO assign permissions to user
 
         return endpoints;
     }
