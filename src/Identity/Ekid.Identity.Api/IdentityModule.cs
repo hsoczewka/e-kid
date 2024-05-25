@@ -17,6 +17,7 @@ public class IdentityModule : ModuleDefinition
     public override void AddModuleComponents(IServiceCollection services, IConfiguration configuration)
     {
         services.AddPermissionsComponents();
+        services.AddIdentityComponents(configuration);
         services.AddSingleton<IPermissionRegistry, Contracts.Security.Permissions>();
     }
 

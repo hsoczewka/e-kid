@@ -9,6 +9,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     {
         builder.ToTable("users");
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.TenantId).IsRequired();
         builder.Property(x => x.Email).IsRequired();
         builder.Property(x => x.Login).IsRequired();
         builder.Property(x => x.FirstName).IsRequired();
@@ -16,5 +17,6 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.Password).IsRequired();
         builder.Property(x => x.Role).IsRequired()
             .HasConversion(x => x.Value, x => new UserRole(x));
+        builder.Property(x => x.IsActive).IsRequired();
     }
 }
