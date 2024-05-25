@@ -2,6 +2,16 @@ namespace Ekid.Identity.Users;
 
 public class User
 {
+    public Guid Id { get; }
+    public Guid TenantId { get; }
+    public string FirstName { get; }
+    public string LastName { get; }
+    public string Login { get; }
+    public string Password { get; }
+    public string Email { get; }
+    public UserRole Role { get; }
+    public bool IsActive { get; }
+    
     public User(Guid id,
         Guid tenantId,
         string firstName,
@@ -22,14 +32,4 @@ public class User
         Role = role;
         IsActive = isActive;
     }
-
-    public Guid Id { get; }
-    public Guid TenantId { get; }
-    public string FirstName { get; }
-    public string LastName { get; }
-    public string Login { get; }
-    public string Password { get; }
-    public string Email { get; }
-    public UserRole Role { get; }
-    public bool IsActive { get; }
 }
