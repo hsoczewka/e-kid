@@ -2,6 +2,7 @@ using Ekid.Api;
 using Ekid.Identity.Api;
 using Ekid.Infrastructure.ModuleContext;
 using Ekid.Infrastructure.Security;
+using Ekid.Infrastructure.Storage;
 using Ekid.Resources.Api;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ var app = builder.Build();
 
 //TODO ensure db created
 app.Services.RegisterAllPermissions();
+app.Services.EnsureDatabaseCreated();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

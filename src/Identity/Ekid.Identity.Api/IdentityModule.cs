@@ -1,5 +1,3 @@
-
-using System.Reflection;
 using Ekid.Identity.Permissions;
 using Ekid.Infrastructure.ModuleContext;
 using Ekid.Infrastructure.Security;
@@ -16,14 +14,13 @@ public class IdentityModule : ModuleDefinition
     
     public override void AddModuleComponents(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddPermissionsComponents();
         services.AddIdentityComponents(configuration);
         services.AddSingleton<IPermissionRegistry, Contracts.Security.Permissions>();
     }
 
     public override void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        var group = endpoints.MapGroup(RoutePrefix);
+        var group = endpoints.MapGroup(RoutePrefix); //.WithTags(["Identity"]);
         group.UsePermissionsEndpoints();
     }
     
