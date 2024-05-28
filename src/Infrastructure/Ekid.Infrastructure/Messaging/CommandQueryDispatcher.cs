@@ -11,14 +11,14 @@ internal sealed class CommandQueryDispatcher : ICommandQueryDispatcher
         _serviceProvider = serviceProvider;
     }
 
-    public async Task SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand
+    public async Task SendAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default) where TCommand : class, ICommand
     {
         using var scope = _serviceProvider.CreateScope();
         var handler = scope.ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
-        await handler.HandleAsync(command);
+        await handler.HandleAsync(command, cancellationToken);
     }
 
-    public async Task<TResult> SendAsync<TResult>(IQuery<TResult> query)
+    public async Task<TResult> SendAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
     {
         using var scope = _serviceProvider.CreateScope();
         var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));

@@ -5,8 +5,23 @@ namespace Ekid.Identity.Users;
 
 public class CreateUserCommandHandler : ICommandHandler<CreateUser>
 {
-    public Task HandleAsync(CreateUser command)
+    private readonly UserRepository _userRepository;
+
+    public CreateUserCommandHandler(UserRepository userRepository)
     {
-        throw new NotImplementedException();
+        _userRepository = userRepository;
+    }
+
+    public async Task HandleAsync(CreateUser command, CancellationToken cancellationToken)
+    {
+        var existingUser = await _userRepository.GetByEmailAsync(command.Email, cancellationToken);
+        if (existingUser is not null)
+            throw new Exception("User with given email already exists.");
+
+        var user = new User(id: Guid.NewGuid(), tenantId: command.TenantId, firstName: command.FirstName,
+            lastName: command.LastName, login: command.Login, password: command.Password, email: command.Email,
+            role: new UserRole(command.Role), isActive: true);
+
+        await _userRepository.AddAsync(user, cancellationToken);
     }
 }

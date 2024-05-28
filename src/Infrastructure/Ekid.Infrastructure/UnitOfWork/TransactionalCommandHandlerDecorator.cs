@@ -10,16 +10,16 @@ public class TransactionalCommandHandlerDecorator<T>(ICommandHandler<T> handler,
     : ICommandHandler<T>
     where T : class, ICommand
 {
-    public async Task HandleAsync(T command)
+    public async Task HandleAsync(T command, CancellationToken cancellationToken)
     {
         var moduleName = ModuleName.Of(typeof(T));
         var unitOfWork = serviceProvider.GetKeyedService<IUnitOfWork>(moduleName);
         if (unitOfWork is null)
         {
-            await handler.HandleAsync(command);
+            await handler.HandleAsync(command, cancellationToken);
             return;
         }
 
-        await unitOfWork.ExecuteAsync(() => handler.HandleAsync(command));
+        await unitOfWork.ExecuteAsync(() => handler.HandleAsync(command, cancellationToken));
     }
 }
