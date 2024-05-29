@@ -18,5 +18,6 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.Role).IsRequired()
             .HasConversion(x => x.Value, x => new UserRole(x));
         builder.Property(x => x.IsActive).IsRequired();
+        builder.Property(x => x.Version).IsConcurrencyToken();
     }
 }

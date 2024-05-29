@@ -11,6 +11,7 @@ public class User
     public string Email { get; }
     public UserRole Role { get; }
     public bool IsActive { get; }
+    public int Version;
     
     public User(Guid id,
         Guid tenantId,

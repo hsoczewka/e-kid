@@ -18,6 +18,10 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUser>
         if (existingUser is not null)
             throw new Exception("User with given email already exists.");
 
+        //if role employee check employees table for existence
+        //employee can not belong to many tenants
+        //user can belong to many tenants
+        //admin can belong to many tenants
         var user = new User(id: Guid.NewGuid(), tenantId: command.TenantId, firstName: command.FirstName,
             lastName: command.LastName, login: command.Login, password: command.Password, email: command.Email,
             role: new UserRole(command.Role), isActive: true);
