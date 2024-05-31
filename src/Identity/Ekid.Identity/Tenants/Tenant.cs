@@ -2,12 +2,12 @@ namespace Ekid.Identity.Tenants;
 
 public class Tenant
 {
-    public Guid Id { get; }
+    public TenantId Id { get; }
     public string Name { get; }
     public string Description { get; }
     public bool IsActive { get; }
     
-    public Tenant(Guid id, string name, string description, bool isActive)
+    public Tenant(TenantId id, string name, string description, bool isActive)
     {
         Id = id;
         Name = name;
