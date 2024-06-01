@@ -12,12 +12,16 @@ public class UserAccountEntityConfiguration : IEntityTypeConfiguration<UserAccou
             .HasConversion(x => x.Id, x => new UserId(x))
             .HasColumnName("UserId");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Email).IsRequired();
+        builder.Property(x => x.Email)
+            .HasMaxLength(320)
+            .IsRequired();
         builder.Property(x => x.Role).IsRequired()
             .HasConversion(x => x.Value, x => new UserRole(x));
         builder.Property(x => x.Tenants).HasColumnType("jsonb");
         builder.Property(x => x.IsActive).IsRequired();
         builder.Property(x => x.CreatedAt).IsRequired();
+        builder.Property(x => x.FirstName).HasMaxLength(150);
+        builder.Property(x => x.LastName).HasMaxLength(150);
         builder.Property("_version").HasColumnName("Version").IsConcurrencyToken();
     }
 }
