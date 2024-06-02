@@ -1,8 +1,13 @@
 namespace Ekid.Identity.Permissions;
 
-public class Permission
+public class PermissionSummary
 {
-    public Guid Id { get; }
-    public string Name { get; }
-    public string Description { get; }
+    public PermissionSummary(Guid id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
+
+    public Guid Id { get; set; }
+    public string Name { get; set; }
 }

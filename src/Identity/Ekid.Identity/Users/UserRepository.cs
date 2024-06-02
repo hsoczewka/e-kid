@@ -11,21 +11,21 @@ public class UserRepository
         _identityDbContext = identityDbContext;
     }
 
-    public async Task AddAsync(User user, CancellationToken cancellationToken)
+    public async Task AddAsync(UserAccount user, CancellationToken cancellationToken)
     {
-        await _identityDbContext.Users.AddAsync(user, cancellationToken);
+        await _identityDbContext.UsersAccounts.AddAsync(user, cancellationToken);
     }
 
     public async Task<UserSummary?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var user = await _identityDbContext.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
-        return user is not null ? UserSummary.FromUser(user) : default;
+        var user = await _identityDbContext.UsersAccounts.AsNoTracking().SingleOrDefaultAsync(x => x.Id.Id == id, cancellationToken);
+        return user is not null ? UserSummary.FromUserAccount(user) : default;
     }
 
     public async Task<UserSummary?> GetByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        var user = await _identityDbContext.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
-        return user is not null ? UserSummary.FromUser(user) : default;
+        var user = await _identityDbContext.UsersAccounts.AsNoTracking().SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
+        return user is not null ? UserSummary.FromUserAccount(user) : default;
     }
 
     //TODO the rest

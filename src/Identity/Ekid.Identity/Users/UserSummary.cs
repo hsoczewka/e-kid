@@ -1,13 +1,12 @@
 namespace Ekid.Identity.Users;
 
-public record UserSummary(Guid Id, string Name, string Login, string Email, bool IsActive, string Role)
+public record UserSummary(Guid Id, string Name, string Email, bool IsActive, string Role)
 {
-    public static UserSummary FromUser(User user)
+    public static UserSummary FromUserAccount(UserAccount user)
     {
         return new UserSummary(
-            user.Id,
+            user.Id.Id,
             $"{user.FirstName} {user.LastName}",
-            user.Login,
             user.Email,
             user.IsActive,
             user.Role.Value

@@ -24,9 +24,9 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUser>
         //admin can belong to many tenants
         
         //TODO apply migration
-        var user = new User(id: Guid.NewGuid(), tenantId: command.TenantId, firstName: command.FirstName,
-            lastName: command.LastName, login: command.Login, password: command.Password, email: command.Email,
-            role: new UserRole(command.Role), isActive: true);
+        var user = new UserAccount(id: UserId.New(), tenants: new HashSet<Guid>(){command.TenantId}, firstName: command.FirstName,
+            lastName: command.LastName, email: command.Email,
+            role: new UserRole(command.Role), isActive: true, permissions: new HashSet<Guid>(){}, createdAt: DateTime.UtcNow);
 
         await _userRepository.AddAsync(user, cancellationToken);
     }

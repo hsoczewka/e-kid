@@ -22,6 +22,7 @@ public class UserAccountEntityConfiguration : IEntityTypeConfiguration<UserAccou
         builder.Property(x => x.CreatedAt).IsRequired();
         builder.Property(x => x.FirstName).HasMaxLength(150);
         builder.Property(x => x.LastName).HasMaxLength(150);
+        builder.Property(x => x.Permissions).HasColumnType("jsonb");
         builder.Property("_version").HasColumnName("Version").IsConcurrencyToken();
     }
 }
