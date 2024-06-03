@@ -1,3 +1,4 @@
+using Ekid.Identity.Tenants;
 using Ekid.Identity.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ public class IdentityDbContext : DbContext
     public const string Schema = "identity";
     public DbSet<UserAccount> UsersAccounts { get; set; }
     public DbSet<UserCredentials> UsersCredentials { get; set; }
+    public DbSet<Tenant> Tenants { get; set; }
 
     public IdentityDbContext(DbContextOptions<IdentityDbContext> options) : base(options)
     {
