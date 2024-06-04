@@ -16,7 +16,7 @@ public class TenantCommandsHandler :
 
     public async Task HandleAsync(CreateTenant command, CancellationToken cancellationToken)
     {
-        var tenantSummary = await _repository.GetByNameAsync(command.Name, cancellationToken);
+        var tenantSummary = await _repository.FindSummaryByNameAsync(command.Name, cancellationToken);
         if (tenantSummary is not null)
             throw new Exception($"Tenant with name {command.Name} already exists.");
 
@@ -24,8 +24,12 @@ public class TenantCommandsHandler :
         await _repository.AddAsync(tenant, cancellationToken);
     }
 
-    public Task HandleAsync(ActivateTenant command, CancellationToken cancellationToken)
+    public async Task HandleAsync(ActivateTenant command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var tenant = await _repository.GetByIdAsync(command.Id, cancellationToken);
+        if (tenant is null)
+            throw new Exception($"Unable to activate non existing tenant: {command.Id}");
+        
+        tenant.Activate();
     }
 }

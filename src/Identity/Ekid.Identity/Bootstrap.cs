@@ -1,4 +1,5 @@
 using Ekid.Identity.Permissions;
+using Ekid.Identity.Tenants;
 using Ekid.Identity.Users;
 using Ekid.Infrastructure.Storage;
 using Ekid.Infrastructure.UnitOfWork;
@@ -13,6 +14,7 @@ public static class Bootstrap
     {
         services.AddPermissionsComponents();
         services.AddUsersComponents();
+        services.AddTenantsComponents();
         services.AddPostgres<IdentityDbContext>(configuration);
         services.AddUnitOfWork<IdentityUnitOfWork>();
     }
