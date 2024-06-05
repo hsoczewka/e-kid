@@ -17,6 +17,7 @@ public abstract class UnitOfWork<T> : IUnitOfWork where T : DbContext
         try
         {
             await action();
+            await _dbContext.SaveChangesAsync();
             await transaction.CommitAsync();
         }
         catch (Exception)

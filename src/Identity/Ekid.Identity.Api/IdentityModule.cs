@@ -1,4 +1,5 @@
 using Ekid.Identity.Permissions;
+using Ekid.Identity.Tenants;
 using Ekid.Infrastructure.ModuleContext;
 using Ekid.Infrastructure.Security;
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,7 @@ public class IdentityModule : ModuleDefinition
     {
         var group = endpoints.MapGroup(RoutePrefix); //.WithTags(["Identity"]);
         group.UsePermissionsEndpoints();
+        group.UseTenantEndpoints();
     }
     
     public override ModuleName Name => ModuleName.Of(GetType());

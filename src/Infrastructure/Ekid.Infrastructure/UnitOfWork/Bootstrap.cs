@@ -8,9 +8,11 @@ public static class Bootstrap
 {
     public static void AddTransactionalHandlers(this IServiceCollection services)
         => services.TryDecorate(typeof(ICommandHandler<>), typeof(TransactionalCommandHandlerDecorator<>));
-    
+
     public static void AddUnitOfWork<TUnitOfWork>(this IServiceCollection services)
         where TUnitOfWork : class, IUnitOfWork
-        => services.AddKeyedScoped<IUnitOfWork, TUnitOfWork>(ModuleName.Of(typeof(TUnitOfWork)));
-    
+    {
+        var module = ModuleName.Of(typeof(TUnitOfWork));
+        services.AddKeyedScoped<IUnitOfWork, TUnitOfWork>(module.Value);
+    }
 }
