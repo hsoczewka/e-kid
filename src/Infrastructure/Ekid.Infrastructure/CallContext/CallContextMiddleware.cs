@@ -1,4 +1,4 @@
-using Ekid.Infrastructure.HttpContext;
+using Ekid.Infrastructure.Http;
 using Microsoft.AspNetCore.Http;
 
 namespace Ekid.Infrastructure.CallContext;
@@ -11,7 +11,7 @@ internal class CallContextMiddleware
 
     public CallContextMiddleware(RequestDelegate next) => this.next = next;
 
-    public async Task Invoke(Microsoft.AspNetCore.Http.HttpContext httpContext, CallContext callContext)
+    public async Task Invoke(HttpContext httpContext, CallContext callContext)
     {
         var user = httpContext.User;
 

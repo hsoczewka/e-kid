@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Http;
-
-namespace Ekid.Infrastructure.HttpContext;
+namespace Ekid.Infrastructure.Http;
 
 public static class HttpContextExtensions
 {
