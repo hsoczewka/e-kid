@@ -35,6 +35,6 @@ public class TenantRepository
     
     public async Task<Tenant?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _identityDbContext.Tenants.SingleOrDefaultAsync(x => x.Id.Id == id, cancellationToken);
+        return await _identityDbContext.Tenants.SingleOrDefaultAsync(x => x.Id == new TenantId(id), cancellationToken);
     }
 }

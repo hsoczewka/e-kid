@@ -42,7 +42,8 @@ internal static class EndpointDefinition
                     return results.Any() ? Ok(results) : NotFound();
                 })
             .Produces<List<Activity>>()
-            .Produces(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest);
         
         /*endpoints.MapGet(

@@ -16,7 +16,7 @@ public static class Endpoints
     internal static IEndpointRouteBuilder UseTenantEndpoints(this IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost(
-                pattern: $"{Route}/create" ,
+                pattern: $"{Route}",
                 handler: async (
                         [FromServices] ICommandQueryDispatcher dispatcher,
                         [FromBody] CreateTenant command,
@@ -28,7 +28,19 @@ public static class Endpoints
             .Produces(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest);
         
-
+        endpoints.MapPut(
+                pattern: $"{Route}/activate",
+                handler: async (
+                        [FromServices] ICommandQueryDispatcher dispatcher,
+                        [FromBody] ActivateTenant command,
+                        CancellationToken cancellationToken)
+                    =>
+                {
+                    await dispatcher.SendAsync(command, cancellationToken);
+                })
+            .Produces(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status400BadRequest);
+        
         return endpoints;
     }
 }
