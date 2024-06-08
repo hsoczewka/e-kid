@@ -105,4 +105,4 @@ For any questions or support, please contact [hubert.soczewka@gmail.com](mailto:
 
 ---
 
-Thank you for using e-Kid!
+Enjoy!
