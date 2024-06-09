@@ -20,6 +20,7 @@ public static class PostgresConfiguration
         return services;
     }
     
+    //replaced by AppInitializer
     public static void EnsureDatabaseCreated(this IServiceProvider serviceProvider)
     {
         var dbContexts = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes())

@@ -1,7 +1,7 @@
+using Ekid.Infrastructure.AppInitialization;
 using Ekid.Infrastructure.Messaging;
 using Ekid.Infrastructure.Security;
 using Ekid.Infrastructure.UnitOfWork;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Ekid.Infrastructure;
 
@@ -12,5 +12,6 @@ public static class Bootstrap
         services.AddCommandQueryDispatcherWithHandlers();
         services.AddTransactionalHandlers();
         services.AddPermissionContainer();
+        services.AddHostedService<AppInitializer>();
     }
 }

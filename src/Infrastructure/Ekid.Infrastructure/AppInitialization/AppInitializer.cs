@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -17,7 +17,25 @@ public class AppInitializer : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
+        var dbContexts = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes())
+            .Where(type => typeof(DbContext).IsAssignableFrom(type))
+            .Where(type => !type.IsAbstract)
+            .Where(type => type != typeof(DbContext))
+            .ToList();
+
         using var scope = _serviceProvider.CreateScope();
+        
+        foreach (var context in dbContexts)
+        {
+            var dbContext = scope.ServiceProvider.GetService(context) as DbContext;
+            if (dbContext is null)
+            {
+                continue;
+            }
+            _logger.LogInformation($"Running migration for DB context {context}");
+            await dbContext.Database.MigrateAsync(cancellationToken);  
+        }
+        
         var initializers = scope.ServiceProvider.GetServices<IComponentInitializer>();
         foreach (var initializer in initializers)
         {

@@ -1,6 +1,3 @@
-using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Ekid.Infrastructure.Security;
 
 public static class Bootstrap
