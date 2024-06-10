@@ -12,9 +12,11 @@ public class UserAccountEntityConfiguration : IEntityTypeConfiguration<UserAccou
             .HasConversion(x => x.Id, x => new UserId(x))
             .HasColumnName("UserId");
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Email).IsUnique();
         builder.Property(x => x.Email)
-            .HasMaxLength(320)
-            .IsRequired();
+            .HasConversion(x => x.Value, x => new Email(x))
+            .IsRequired()
+            .HasMaxLength(100);
         builder.Property(x => x.Role).IsRequired()
             .HasConversion(x => x.Value, x => new UserRole(x));
         builder.Property(x => x.Tenants).HasColumnType("jsonb");
