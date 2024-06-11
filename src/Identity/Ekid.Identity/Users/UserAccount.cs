@@ -1,3 +1,5 @@
+using Ekid.Identity.Contracts.Users.Commands;
+
 namespace Ekid.Identity.Users;
 
 public class UserAccount
@@ -38,5 +40,19 @@ public class UserAccount
     //employee can belong to one tenant only
     //admin can belong to many tenants
     //user can belong to many tenants
+
+    public static UserAccount Create(CreateUserAccount command)
+    {
+        var role = new UserRole(command.Role);
+        if (command.Tenants != null && role.Value == UserRole.Employee.Value && command.Tenants.Count != 1)
+        {
+            throw new Exception($"User with role '{role.Value}' can belongs to one tenant only.");
+        }
+
+        return new UserAccount(id: UserId.New(), email: new Email(command.Email), firstName: command.FirstName,
+            lastName: command.LastName, role: role, tenants: command.Tenants ?? new HashSet<Guid>(), permissions: command.Permissions ?? new HashSet<Guid>(),
+            isActive: true, createdAt: DateTime.UtcNow);
+
+    }
     
 }
