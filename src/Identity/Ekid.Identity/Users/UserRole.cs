@@ -8,7 +8,7 @@ public sealed record UserRole
     public string Value { get; }
 
     private static IEnumerable<string> AvailableRoles { get; } =
-        new[] { UserRole.User.Value, UserRole.Administrator.Value, UserRole.Employee.Value };
+        new[] { "User", "Administrator", "Employee" };
     
     public static UserRole Administrator => new UserRole(nameof(Administrator));
     public static UserRole User => new UserRole(nameof(User));

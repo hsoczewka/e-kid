@@ -1,4 +1,5 @@
 using Ekid.Identity.Contracts.Users.Commands;
+using Ekid.Identity.Users.Exceptions;
 using Ekid.Infrastructure.Messaging;
 
 namespace Ekid.Identity.Users;
@@ -12,8 +13,14 @@ public class UserAccountCommandsHandler : ICommandHandler<CreateUserAccount>
         _userRepository = userRepository;
     }
 
-    public Task HandleAsync(CreateUserAccount command, CancellationToken cancellationToken)
+    public async Task HandleAsync(CreateUserAccount command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var userAccount = UserAccount.Create(command);
+        if (await _userRepository.GetByEmailAsync(userAccount.Email, cancellationToken) is not null)
+        {
+            throw new EmailAlreadyInUseException(userAccount.Email);
+        }
+
+        await _userRepository.AddAsync(userAccount, cancellationToken);
     }
 }

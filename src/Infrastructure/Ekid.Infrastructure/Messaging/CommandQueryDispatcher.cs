@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Ekid.Infrastructure.Messaging;
 
 internal sealed class CommandQueryDispatcher : ICommandQueryDispatcher
