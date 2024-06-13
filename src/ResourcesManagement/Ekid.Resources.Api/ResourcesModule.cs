@@ -3,6 +3,7 @@ using Ekid.Infrastructure.Security;
 using Ekid.Resources.Activities;
 using Ekid.Resources.Contracts.Security;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ public class ResourcesModule : ModuleDefinition
     {
         var group = endpoints.MapGroup(RoutePrefix);
         group.UseActivitiesEndpoints();
+        group.WithTags("resources");
     }
     
     public override ModuleName Name => ModuleName.Of(GetType());
