@@ -4,6 +4,7 @@ using Ekid.Identity.Users;
 using Ekid.Infrastructure.ModuleContext;
 using Ekid.Infrastructure.Security;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,10 +23,11 @@ public class IdentityModule : ModuleDefinition
 
     public override void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        var group = endpoints.MapGroup(RoutePrefix); //.WithTags(["Identity"]);
+        var group = endpoints.MapGroup(RoutePrefix);
         group.UsePermissionsEndpoints();
         group.UseTenantEndpoints();
         group.UseUsersEndpoints();
+        group.WithTags("identity");
     }
     
     public override ModuleName Name => ModuleName.Of(GetType());
