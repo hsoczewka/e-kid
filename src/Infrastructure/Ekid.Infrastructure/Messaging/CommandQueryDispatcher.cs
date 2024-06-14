@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Ekid.Infrastructure.Messaging;
 
 internal sealed class CommandQueryDispatcher : ICommandQueryDispatcher
@@ -23,9 +21,12 @@ internal sealed class CommandQueryDispatcher : ICommandQueryDispatcher
         using var scope = _serviceProvider.CreateScope();
         var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
         var handler = scope.ServiceProvider.GetRequiredService(handlerType);
+        var method = handlerType.GetMethod(nameof(IQueryHandler<IQuery<TResult>, TResult>.HandleAsync));
+        if (method is null)
+        {
+            throw new InvalidOperationException($"Query handler for '{typeof(TResult).Name}' is invalid.");
+        }
 
-        return await (Task<TResult>) handlerType
-            .GetMethod(nameof(IQueryHandler<IQuery<TResult>, TResult>.HandleAsync))
-            ?.Invoke(handler, new[] {query});
+        return await (Task<TResult>)method.Invoke(handler, new object[] {query, cancellationToken})!;
     }
 }

@@ -16,13 +16,13 @@ public class UserRepository
         await _identityDbContext.UsersAccounts.AddAsync(user, cancellationToken);
     }
 
-    public async Task<UserSummary?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<UserSummary?> GetByIdAsync(UserId id, CancellationToken cancellationToken)
     {
-        var user = await _identityDbContext.UsersAccounts.AsNoTracking().SingleOrDefaultAsync(x => x.Id.Id == id, cancellationToken);
+        var user = await _identityDbContext.UsersAccounts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
         return user is not null ? UserSummary.FromUserAccount(user) : default;
     }
 
-    public async Task<UserSummary?> GetByEmailAsync(string email, CancellationToken cancellationToken)
+    public async Task<UserSummary?> GetByEmailAsync(Email email, CancellationToken cancellationToken)
     {
         var user = await _identityDbContext.UsersAccounts.AsNoTracking().SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
         return user is not null ? UserSummary.FromUserAccount(user) : default;

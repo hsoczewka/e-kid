@@ -12,15 +12,20 @@ public class UserCredentialsEntityConfiguration : IEntityTypeConfiguration<UserC
             .HasConversion(x => x.Id, x => new UserId(x))
             .HasColumnName("UserId");
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Email).IsUnique();
         builder.Property(x => x.Email)
-            .HasMaxLength(320)
-            .IsRequired();
+            .HasConversion(x => x.Value, x => new Email(x))
+            .IsRequired()
+            .HasMaxLength(100);
+        builder.HasIndex(x => x.Login).IsUnique();
         builder.Property(x => x.Login)
-            .HasMaxLength(50)
-            .IsRequired();
+            .HasConversion(x => x.Value, x => new Login(x))
+            .IsRequired()
+            .HasMaxLength(30);
         builder.Property(x => x.Password)
-            .HasMaxLength(256)
-            .IsRequired();
+            .HasConversion(x => x.Value, x => new Password(x))
+            .IsRequired()
+            .HasMaxLength(256);
         builder.Property("_version").HasColumnName("Version").IsConcurrencyToken();
     }
 }
