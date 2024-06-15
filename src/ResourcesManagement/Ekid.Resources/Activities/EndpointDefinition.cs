@@ -46,7 +46,7 @@ internal static class EndpointDefinition
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest);
         
-        /*endpoints.MapGet(
+        endpoints.MapGet(
                 pattern: "api/activities/{activityId:guid}",
                 handler: async (
                         [FromServices] InMemoryActivityRepository repository,
@@ -59,7 +59,7 @@ internal static class EndpointDefinition
                 })
             .Produces<Activity?>()
             .Produces(StatusCodes.Status201Created)
-            .Produces(StatusCodes.Status400BadRequest);*/
+            .Produces(StatusCodes.Status400BadRequest);
 
         return endpoints;
     }
