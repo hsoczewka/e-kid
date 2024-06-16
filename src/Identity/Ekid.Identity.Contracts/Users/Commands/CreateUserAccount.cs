@@ -1,5 +1,4 @@
 using Ekid.Infrastructure.ExecutionPolicy;
-using Ekid.Infrastructure.Messaging;
 
 namespace Ekid.Identity.Contracts.Users.Commands;
 
