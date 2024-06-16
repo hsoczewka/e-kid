@@ -1,13 +1,10 @@
 using Ekid.Identity.Contracts.Users.Commands;
-using Ekid.Identity.Users.Exceptions;
 using Ekid.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Identity;
 
 namespace Ekid.Identity.Users;
 
-public class UserAuthenticationCommandsHandler : 
-    ICommandHandler<SignUp>, 
-    ICommandHandler<SignIn>
+public class UserAuthenticationCommandsHandler : ICommandHandler<SignUp>
 {
     private readonly UserAccountRepository _userAccountRepository;
     private readonly IPasswordHasher<UserCredentials> _passwordHasher;
@@ -27,7 +24,7 @@ public class UserAuthenticationCommandsHandler :
         var email = new Email(command.Email);
         var userAccount = await _userAccountRepository.GetByEmailAsync(email, cancellationToken);
         if (userAccount is null)
-            throw SignUpException.AccountNotExists();
+            throw new Exception("User account does not exists. You are not allowed to sign up.");
         var userId = new UserId(userAccount.Id);
         var credentials = UserCredentials.Create(command, _passwordHasher, userId);
 
@@ -37,24 +34,9 @@ public class UserAuthenticationCommandsHandler :
         else
         {
             if (existsCredentials.Login == credentials.Login)
-                throw SignUpException.CredentialsInUse("Login");
+                throw new Exception("Login already in use");
             if (existsCredentials.Email == credentials.Email)
-                throw SignUpException.CredentialsInUse("Email");
+                throw new Exception("Email already in user.");
         }
-    }
-
-    public async Task HandleAsync(SignIn command, CancellationToken cancellationToken)
-    {
-        var userCredentials = await _userCredentialsRepository.GetByEmailAsync(command.Email, cancellationToken);
-        if (userCredentials is null)
-            throw new InvalidCredentialsException();
-
-        if (_passwordHasher.VerifyHashedPassword(userCredentials, userCredentials.Password, command.Password) !=
-            PasswordVerificationResult.Success)
-            throw new InvalidCredentialsException();
-        
-        //TODO
-        //create token
-        //return token back
     }
 }
