@@ -6,21 +6,21 @@ namespace Ekid.Identity.Users;
 
 public class UserAccountCommandsHandler : ICommandHandler<CreateUserAccount>
 {
-    private readonly UserRepository _userRepository;
+    private readonly UserAccountRepository _userAccountRepository;
 
-    public UserAccountCommandsHandler(UserRepository userRepository)
+    public UserAccountCommandsHandler(UserAccountRepository userAccountRepository)
     {
-        _userRepository = userRepository;
+        _userAccountRepository = userAccountRepository;
     }
 
     public async Task HandleAsync(CreateUserAccount command, CancellationToken cancellationToken)
     {
         var userAccount = UserAccount.Create(command);
-        if (await _userRepository.GetByEmailAsync(userAccount.Email, cancellationToken) is not null)
+        if (await _userAccountRepository.GetByEmailAsync(userAccount.Email, cancellationToken) is not null)
         {
             throw new EmailAlreadyInUseException(userAccount.Email);
         }
 
-        await _userRepository.AddAsync(userAccount, cancellationToken);
+        await _userAccountRepository.AddAsync(userAccount, cancellationToken);
     }
 }

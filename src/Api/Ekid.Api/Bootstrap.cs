@@ -9,5 +9,5 @@ public static class Bootstrap
     {
         services.AddInfrastructure();
         services.AddModulesComponents(configuration);
-    }
+    } 
 }

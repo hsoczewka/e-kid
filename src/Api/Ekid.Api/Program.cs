@@ -1,5 +1,6 @@
 using Ekid.Api;
 using Ekid.Identity.Api;
+using Ekid.Infrastructure.ExecutionPolicy;
 using Ekid.Infrastructure.ModuleContext;
 using Ekid.Infrastructure.Security;
 using Ekid.Resources.Api;
@@ -15,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationComponents(builder.Configuration);
+builder.Services.AddSingleton<ExecutionPolicyMiddleware>();
 
 var app = builder.Build();
 
@@ -28,11 +30,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseMiddleware<ExecutionPolicyMiddleware>();
+app.UseEndpoints(endpoints => endpoints.UseModuleEndpoints());
 app.MapControllers();
-app.UseRouting()
-    .UseEndpoints(endpoints =>
-{
-    endpoints.UseModuleEndpoints();
-});
+
 
 app.Run();
