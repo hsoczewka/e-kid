@@ -56,19 +56,6 @@ public static class Endpoints
            .Produces(StatusCodes.Status201Created)
            .Produces(StatusCodes.Status400BadRequest);
         
-        endpoints.MapPost(
-                pattern: $"{Route}/sign-in",
-                handler: async (
-                        [FromServices] ICommandQueryDispatcher dispatcher,
-                        [FromBody] SignIn command,
-                        CancellationToken cancellationToken)
-                    =>
-                {
-                    await dispatcher.SendAsync(command, cancellationToken);
-                })
-            .Produces(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status400BadRequest);
-        
         return endpoints;
     }
 }
