@@ -43,18 +43,18 @@ public static class Endpoints
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest);
         
-        /*endpoints.MapPut(
-                pattern: $"{Route}/activate",
-                handler: async (
-                        [FromServices] ICommandQueryDispatcher dispatcher,
-                        [FromBody] ActivateTenant command,
-                        CancellationToken cancellationToken)
-                    =>
-                {
-                    await dispatcher.SendAsync(command, cancellationToken);
-                })
-            .Produces(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status400BadRequest);*/
+        endpoints.MapPost(
+               pattern: $"{Route}/sign-up",
+               handler: async (
+                       [FromServices] ICommandQueryDispatcher dispatcher,
+                       [FromBody] SignUp command,
+                       CancellationToken cancellationToken)
+                   =>
+               {
+                   await dispatcher.SendAsync(command, cancellationToken);
+               })
+           .Produces(StatusCodes.Status201Created)
+           .Produces(StatusCodes.Status400BadRequest);
         
         return endpoints;
     }
