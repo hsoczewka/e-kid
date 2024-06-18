@@ -20,6 +20,11 @@ public class UserCredentialsRepository
     {
         return await _identityDbContext.UsersCredentials.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
+    
+    public async Task<UserCredentials?> GetByEmailAsync(Email email, CancellationToken cancellationToken)
+    {
+        return await _identityDbContext.UsersCredentials.AsNoTracking().SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
+    }
 
     public async Task<UserCredentials?> FindAsync(UserCredentials user, CancellationToken token)
     {
