@@ -1,10 +1,13 @@
 using Ekid.Identity.Contracts.Users.Commands;
+using Ekid.Identity.Users.Exceptions;
 using Ekid.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Identity;
 
 namespace Ekid.Identity.Users;
 
-public class UserAuthenticationCommandsHandler : ICommandHandler<SignUp>
+public class UserAuthenticationCommandsHandler : 
+    ICommandHandler<SignUp>, 
+    ICommandHandler<SignIn>
 {
     private readonly UserAccountRepository _userAccountRepository;
     private readonly IPasswordHasher<UserCredentials> _passwordHasher;
@@ -24,7 +27,7 @@ public class UserAuthenticationCommandsHandler : ICommandHandler<SignUp>
         var email = new Email(command.Email);
         var userAccount = await _userAccountRepository.GetByEmailAsync(email, cancellationToken);
         if (userAccount is null)
-            throw new Exception("User account does not exists. You are not allowed to sign up.");
+            throw SignUpException.AccountNotExists();
         var userId = new UserId(userAccount.Id);
         var credentials = UserCredentials.Create(command, _passwordHasher, userId);
 
@@ -34,9 +37,24 @@ public class UserAuthenticationCommandsHandler : ICommandHandler<SignUp>
         else
         {
             if (existsCredentials.Login == credentials.Login)
-                throw new Exception("Login already in use");
+                throw SignUpException.CredentialsInUse("Login");
             if (existsCredentials.Email == credentials.Email)
-                throw new Exception("Email already in user.");
+                throw SignUpException.CredentialsInUse("Email");
         }
+    }
+
+    public async Task HandleAsync(SignIn command, CancellationToken cancellationToken)
+    {
+        var userCredentials = await _userCredentialsRepository.GetByEmailAsync(command.Email, cancellationToken);
+        if (userCredentials is null)
+            throw new InvalidCredentialsException();
+
+        if (_passwordHasher.VerifyHashedPassword(userCredentials, userCredentials.Password, command.Password) !=
+            PasswordVerificationResult.Success)
+            throw new InvalidCredentialsException();
+        
+        //TODO
+        //create token
+        //return token back
     }
 }
