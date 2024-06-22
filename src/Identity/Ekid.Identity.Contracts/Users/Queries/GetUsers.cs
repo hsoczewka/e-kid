@@ -1,7 +1,8 @@
-using Ekid.Infrastructure.Messaging;
+using Ekid.Infrastructure.ExecutionPolicy;
 
 namespace Ekid.Identity.Contracts.Users.Queries;
 
+[RequireAdmin]
 public class GetUsers : IQuery<UsersResponse>
 {
     

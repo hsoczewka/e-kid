@@ -2,11 +2,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ekid.Identity.Users;
 
-public class UserRepository
+public class UserAccountRepository
 {
     private readonly IdentityDbContext _identityDbContext;
 
-    public UserRepository(IdentityDbContext identityDbContext)
+    public UserAccountRepository(IdentityDbContext identityDbContext)
     {
         _identityDbContext = identityDbContext;
     }
