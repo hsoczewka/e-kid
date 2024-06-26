@@ -65,7 +65,9 @@ public static class Endpoints
                     =>
                 {
                     await dispatcher.SendAsync(command, cancellationToken);
+                    return command.Token;
                 })
+            .Produces<UserAccessToken>()
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest);
         
