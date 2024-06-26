@@ -1,5 +1,6 @@
 using Ekid.Identity.Contracts.Users.Commands;
 using Ekid.Identity.Users.Exceptions;
+using Ekid.Infrastructure.Auth;
 using Ekid.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Identity;
 
@@ -12,14 +13,17 @@ public class UserAuthenticationCommandsHandler :
     private readonly UserAccountRepository _userAccountRepository;
     private readonly IPasswordHasher<UserCredentials> _passwordHasher;
     private readonly UserCredentialsRepository _userCredentialsRepository;
+    private readonly IAuthTokenGenerator _tokenGenerator;
 
     public UserAuthenticationCommandsHandler(UserAccountRepository userAccountRepository,
         IPasswordHasher<UserCredentials> passwordHasher,
-        UserCredentialsRepository userCredentialsRepository)
+        UserCredentialsRepository userCredentialsRepository, 
+        IAuthTokenGenerator tokenGenerator)
     {
         _userAccountRepository = userAccountRepository;
         _passwordHasher = passwordHasher;
         _userCredentialsRepository = userCredentialsRepository;
+        _tokenGenerator = tokenGenerator;
     }
 
     public async Task HandleAsync(SignUp command, CancellationToken cancellationToken)
@@ -27,7 +31,7 @@ public class UserAuthenticationCommandsHandler :
         var email = new Email(command.Email);
         var userAccount = await _userAccountRepository.GetByEmailAsync(email, cancellationToken);
         if (userAccount is null)
-            throw SignUpException.AccountNotExists();
+            throw AuthenticationException.AccountNotExists();
         var userId = new UserId(userAccount.Id);
         var credentials = UserCredentials.Create(command, _passwordHasher, userId);
 
@@ -37,9 +41,9 @@ public class UserAuthenticationCommandsHandler :
         else
         {
             if (existsCredentials.Login == credentials.Login)
-                throw SignUpException.CredentialsInUse("Login");
+                throw AuthenticationException.CredentialsInUse("Login");
             if (existsCredentials.Email == credentials.Email)
-                throw SignUpException.CredentialsInUse("Email");
+                throw AuthenticationException.CredentialsInUse("Email");
         }
     }
 
@@ -52,9 +56,12 @@ public class UserAuthenticationCommandsHandler :
         if (_passwordHasher.VerifyHashedPassword(userCredentials, userCredentials.Password, command.Password) !=
             PasswordVerificationResult.Success)
             throw new InvalidCredentialsException();
+
+        var userAccount = await _userAccountRepository.GetByEmailAsync(command.Email, cancellationToken);
+        if (userAccount is null)
+            throw AuthenticationException.AccountNotExists();
         
-        //TODO
-        //create token
-        //return token back
+        var jwt = _tokenGenerator.CreateToken(userCredentials.Id.Id, userAccount.Role);
+        command.Token = new UserAccessToken(AccessToken: jwt.AccessToken);
     }
 }

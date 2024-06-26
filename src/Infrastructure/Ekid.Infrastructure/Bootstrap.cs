@@ -38,6 +38,8 @@ public static class Bootstrap
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseMiddleware<ExecutionPolicyMiddleware>();
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseEndpoints(endpoints => endpoints.UseModuleEndpoints());
         app.MapControllers();
     }
