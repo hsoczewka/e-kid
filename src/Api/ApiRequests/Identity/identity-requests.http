@@ -1,0 +1,10 @@
+### Sign In User
+POST {{baseUrl}}/identity/user/sign-in
+Content-Type: application/json
+
+{
+  "email": "email@superadmin.com",
+  "password": "P@sw0rd"
+}
+
+> {% client.global.set("accessToken", response.body.accessToken); %}
