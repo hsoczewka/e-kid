@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiRequests", "ApiRequests"
 	ProjectSection(SolutionItems) = preProject
 		src\Api\ApiRequests\Identity\identity-requests.http = src\Api\ApiRequests\Identity\identity-requests.http
 		src\Api\ApiRequests\http-client.env.json = src\Api\ApiRequests\http-client.env.json
+		src\Api\ApiRequests\Identity\identity-permissions.http = src\Api\ApiRequests\Identity\identity-permissions.http
 	EndProjectSection
 EndProject
 Global
