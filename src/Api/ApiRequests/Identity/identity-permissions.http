@@ -1,0 +1,3 @@
+### Get Permissions
+GET {{baseUrl}}/identity/permissions
+Authorization: Bearer {{accessToken}}

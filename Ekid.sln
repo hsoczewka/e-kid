@@ -31,6 +31,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Identity.Api", "src\Id
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekid.Identity.Contracts", "src\Identity\Ekid.Identity.Contracts\Ekid.Identity.Contracts.csproj", "{0D2A33EE-9427-48C9-ADF7-17CF6DBDDD27}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiRequests", "ApiRequests", "{BE70AF26-9394-4368-9C6C-2929CD2FAB56}"
+	ProjectSection(SolutionItems) = preProject
+		src\Api\ApiRequests\Identity\identity-requests.http = src\Api\ApiRequests\Identity\identity-requests.http
+		src\Api\ApiRequests\http-client.env.json = src\Api\ApiRequests\http-client.env.json
+		src\Api\ApiRequests\Identity\identity-permissions.http = src\Api\ApiRequests\Identity\identity-permissions.http
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,5 +98,6 @@ Global
 		{1CE7C370-4E56-41F1-9A4D-6FE3376E65E8} = {A589EF2A-0F56-4F32-9B90-8C92DDC7D774}
 		{09174CA1-06DB-4550-9340-B065F0384C33} = {22D0D330-EE79-44AA-B1BE-97F30CCC99CF}
 		{0D2A33EE-9427-48C9-ADF7-17CF6DBDDD27} = {22D0D330-EE79-44AA-B1BE-97F30CCC99CF}
+		{BE70AF26-9394-4368-9C6C-2929CD2FAB56} = {0AFA23CE-FDA3-4E83-BF37-A119A929CF81}
 	EndGlobalSection
 EndGlobal

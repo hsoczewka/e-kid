@@ -54,7 +54,8 @@ public static class Endpoints
                    await dispatcher.SendAsync(command, cancellationToken);
                })
            .Produces(StatusCodes.Status201Created)
-           .Produces(StatusCodes.Status400BadRequest);
+           .Produces(StatusCodes.Status400BadRequest)
+           .AllowAnonymous();
         
         endpoints.MapPost(
                 pattern: $"{Route}/sign-in",
@@ -65,9 +66,12 @@ public static class Endpoints
                     =>
                 {
                     await dispatcher.SendAsync(command, cancellationToken);
+                    return command.Token;
                 })
+            .Produces<UserAccessToken>()
             .Produces(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status400BadRequest);
+            .Produces(StatusCodes.Status400BadRequest)
+            .AllowAnonymous();
         
         return endpoints;
     }
