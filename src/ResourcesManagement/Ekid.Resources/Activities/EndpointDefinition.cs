@@ -1,3 +1,4 @@
+using Ekid.Infrastructure.CallContext;
 using Ekid.Infrastructure.Primitives;
 using Ekid.Resources.Activities.DAL;
 using Ekid.Resources.Contracts.Activities.Commands;
@@ -21,16 +22,18 @@ internal static class EndpointDefinition
                         CancellationToken ct)
                     =>
                 {
-                    var activity = new Activity(Guid.NewGuid(), Guid.NewGuid(),  command.Description, ActivityType.Diagnosis,
+                    var activity = new Activity(Guid.NewGuid(), Guid.NewGuid(), command.Description,
+                        ActivityType.Diagnosis,
                         TimeSpan.FromMinutes(command.Duration), new Prices(new List<ProductPrice>()));
                     await repository.SaveAsync(activity);
-                    
+
                     return Created($"/api/activities/{activity.Id}", activity.Id);
-                    
+
                 })
             .Produces(StatusCodes.Status201Created)
-            .Produces(StatusCodes.Status400BadRequest);
-        
+            .Produces(StatusCodes.Status400BadRequest)
+            .RequireTenantId();
+
         endpoints.MapGet(
                 pattern: "activities",
                 handler: async (
@@ -44,8 +47,9 @@ internal static class EndpointDefinition
             .Produces<List<Activity>>()
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
-            .Produces(StatusCodes.Status400BadRequest);
-        
+            .Produces(StatusCodes.Status400BadRequest)
+            .RequireTenantId();
+
         endpoints.MapGet(
                 pattern: "api/activities/{activityId:guid}",
                 handler: async (
@@ -59,7 +63,8 @@ internal static class EndpointDefinition
                 })
             .Produces<Activity?>()
             .Produces(StatusCodes.Status201Created)
-            .Produces(StatusCodes.Status400BadRequest);
+            .Produces(StatusCodes.Status400BadRequest)
+            .RequireTenantId();
 
         return endpoints;
     }
