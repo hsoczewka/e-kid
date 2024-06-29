@@ -1,5 +1,3 @@
-using Ekid.Infrastructure.Tenant;
-
 namespace Ekid.Infrastructure.CallContext;
 
 public class CallContext
@@ -14,4 +12,6 @@ public class CallContext
     public Guid? TenantId { get; internal set; }
     public Guid CorrelationId { get; internal set; }
     public Guid UserId { get; internal set; }
+
+    internal static CallContext Empty() => new CallContext(null, Guid.Empty, Guid.Empty);
 }

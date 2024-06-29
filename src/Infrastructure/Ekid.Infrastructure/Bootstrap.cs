@@ -1,5 +1,6 @@
 using Ekid.Infrastructure.AppInitialization;
 using Ekid.Infrastructure.Auth;
+using Ekid.Infrastructure.CallContext;
 using Ekid.Infrastructure.ExecutionPolicy;
 using Ekid.Infrastructure.Messaging;
 using Ekid.Infrastructure.ModuleContext;
@@ -23,6 +24,7 @@ public static class Bootstrap
         services.AddPermissionContainer();
         services.AddHostedService<AppInitializer>();
         services.AddAuth(configuration);
+        services.AddCallContextComponents();
         services.AddSingleton<ExecutionPolicyMiddleware>();
     }
 
@@ -37,6 +39,7 @@ public static class Bootstrap
         }
         app.UseHttpsRedirection();
         app.UseRouting();
+        app.UseCallContext();
         app.UseMiddleware<ExecutionPolicyMiddleware>();
         app.UseAuthentication();
         app.UseAuthorization();
