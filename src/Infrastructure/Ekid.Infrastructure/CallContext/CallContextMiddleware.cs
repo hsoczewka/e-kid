@@ -18,6 +18,8 @@ internal class CallContextMiddleware : IMiddleware
     {
         var user = httpContext.User;
 
+        //TODO 
+        // only system admin can execute action without TenantId 
         var endpoint = httpContext.GetEndpoint();
         var tenantIdRequired = endpoint?.Metadata.GetMetadata<TenantIdRequiredAttribute>();
         if (tenantIdRequired != null)
