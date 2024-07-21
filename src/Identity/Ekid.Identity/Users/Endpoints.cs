@@ -58,7 +58,7 @@ public static class Endpoints
            .AllowAnonymous();
         
         endpoints.MapPost(
-                pattern: $"{Route}/sign-in",
+                pattern: $"{Route}/login",
                 handler: async (
                         [FromServices] ICommandQueryDispatcher dispatcher,
                         [FromBody] SignIn command,

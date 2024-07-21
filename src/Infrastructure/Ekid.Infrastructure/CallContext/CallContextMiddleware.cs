@@ -3,21 +3,35 @@ using Microsoft.AspNetCore.Http;
 
 namespace Ekid.Infrastructure.CallContext;
 
-internal class CallContextMiddleware
+internal class CallContextMiddleware : IMiddleware
 {
     public const string TenantIdHeader = "Tenant-ID";
-    
-    private readonly RequestDelegate next;
 
-    public CallContextMiddleware(RequestDelegate next) => this.next = next;
+    private readonly CallContext _callContext;
 
-    public async Task Invoke(HttpContext httpContext, CallContext callContext)
+    public CallContextMiddleware(CallContext callContext)
+    {
+        this._callContext = callContext;
+    }
+
+    public async Task InvokeAsync(HttpContext httpContext, RequestDelegate next)
     {
         var user = httpContext.User;
 
-        callContext.TenantId = httpContext.ParseGuid(TenantIdHeader);
-        //TODO check if token is valid
-        //set tenant id from header value
+        //TODO 
+        // only system admin can execute action without TenantId 
+        var endpoint = httpContext.GetEndpoint();
+        var tenantIdRequired = endpoint?.Metadata.GetMetadata<TenantIdRequiredAttribute>();
+        if (tenantIdRequired != null)
+        {
+            _callContext.TenantId = httpContext.ParseGuid(TenantIdHeader);
+            if (_callContext.TenantId is null)
+            {
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                await httpContext.Response.WriteAsync($"{TenantIdHeader} value is required.");
+                return;
+            }
+        }
         
         await next(httpContext);
     }

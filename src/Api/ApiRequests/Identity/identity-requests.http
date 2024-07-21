@@ -1,5 +1,5 @@
 ### Sign In User
-POST {{baseUrl}}/identity/user/sign-in
+POST {{baseUrl}}/identity/user/login
 Content-Type: application/json
 
 {

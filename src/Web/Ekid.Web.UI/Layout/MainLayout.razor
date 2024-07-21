@@ -1,0 +1,41 @@
+﻿@using Ekid.Web.UI.Services
+@using Ekid.Web.UI.Pages
+@inherits LayoutComponentBase
+@inject IAuthenticationService AuthenticationService;
+
+@{
+    var isAuthenticated = AuthenticationService.User is not null;
+}
+
+@if (isAuthenticated)
+{
+    <MudLayout>
+        <MudAppBar Elevation="1">
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            <MudText Typo="Typo.h5" Class="ml-3"><a style="color: white" href="/">Ekid</a></MudText>
+            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Link="/tenants">Tenants</MudButton>
+            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Link="/account">Account</MudButton>
+            <MudSpacer/>
+            <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End"/>
+        </MudAppBar>
+        <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+            <NavMenu />
+        </MudDrawer>
+        <MudMainContent>
+            @Body
+        </MudMainContent>
+    </MudLayout>
+}
+else
+{
+    <RedirectToLogin />
+}
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
