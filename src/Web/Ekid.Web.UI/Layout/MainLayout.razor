@@ -1,16 +1,41 @@
-﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
+﻿@using Ekid.Web.UI.Services
+@using Ekid.Web.UI.Pages
+@inherits LayoutComponentBase
+@inject IAuthenticationService AuthenticationService;
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+@{
+    var isAuthenticated = AuthenticationService.User is not null;
+}
 
-        <article class="content px-4">
+@if (isAuthenticated)
+{
+    <MudLayout>
+        <MudAppBar Elevation="1">
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            <MudText Typo="Typo.h5" Class="ml-3"><a style="color: white" href="/">Ekid</a></MudText>
+            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Link="/tenants">Tenants</MudButton>
+            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Link="/account">Account</MudButton>
+            <MudSpacer/>
+            <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End"/>
+        </MudAppBar>
+        <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+            <NavMenu />
+        </MudDrawer>
+        <MudMainContent>
             @Body
-        </article>
-    </main>
-</div>
+        </MudMainContent>
+    </MudLayout>
+}
+else
+{
+    <RedirectToLogin />
+}
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
