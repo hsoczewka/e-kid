@@ -52,7 +52,7 @@
     private async Task SignInAsync()
     {
         _submitted = true;
-        var signedIn = await AuthenticationService.SignInAsync(_signInModel.Email, _signInModel.Password);
+        var signedIn = await AuthenticationService.LoginAsync(_signInModel.Email, _signInModel.Password);
         _submitted = false;
 
         if (signedIn is null)

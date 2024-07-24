@@ -1,3 +1,4 @@
+using Ekid.Web;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Ekid.Web.UI;
@@ -10,10 +11,13 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
+builder.Services.AddWebCore();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IApiResponseHandler, ApiResponseHandler>();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
+//builder.Services.AddCascadingAuthenticationState(); //check this
+//builder.Services.AddAuthorizationCore();
+//builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
 builder.Services.AddMudServices();
 builder.Services.AddMudBlazorSnackbar(config =>
 {

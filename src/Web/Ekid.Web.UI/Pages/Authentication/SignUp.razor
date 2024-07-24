@@ -1,6 +1,88 @@
 @layout AuthLayout 
 @page "/identity/user/sign-up"
+@using System.ComponentModel.DataAnnotations
+@using System.Net
+@using Ekid.Web.UI.Services
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <div style="max-width: 500px; margin-top: 30%;">
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Color="Color.Secondary" Align="Align.Center" Typo="Typo.h5"><b>Sign Up</b></MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudForm Model="@_signUpModel" @bind-IsValid="@_success" @bind-Errors="@_errors">
+                    <MudTextField @bind-Value="@_signUpModel.Email" T="string" HelperText="Email" Required="true" RequiredError="Email is required!"
+                                  Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})"/>
+                    <MudTextField @bind-Value="@_signUpModel.Password" T="string" HelperText="Password"
+                                  InputType="InputType.Password" Required="true"
+                                  Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))"
+                                  RequiredError="Password is required!"/>
+                    <br/>
+                    <MudText>Already have an account? Click <MudLink Color="Color.Secondary" Href="/identity/user/login" Style="cursor: pointer;">here</MudLink> to sign in.</MudText>
+                </MudForm>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@SignUpAsync" Disabled="_submitted || !_success" Class="ml-auto">Sign Up</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </div>
+</MudContainer>
+
 
 @code {
+    private bool _success;
+    private bool _submitted;
+    private string[] _errors = { };
+    private SignUpModel _signUpModel = new();
+    [Inject] private IApiResponseHandler ApiResponseHandler { get; set; } = default!;
+    [Inject] NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] IAuthenticationService _authenticationService { get; set; } = default!;
+
+    //TODO login text field
+    private record SignUpModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+    }
     
+    private IEnumerable<string> PasswordStrength(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+        if (password.Length < 3)
+            yield return "Password must be at least of length 3.";
+    }
+    
+    private async Task SignUpAsync()
+    {
+        _submitted = true;
+        await _authenticationService.SignUpAsync(login: "", password: "", email:"");
+
+        _submitted = false;
+
+        /*if (response is null || response.HttpResponse.StatusCode == HttpStatusCode.BadGateway)
+        {
+            Snackbar.Add("Couldn't sign up - service is unavailable :(", Severity.Error);
+            return;
+        }
+
+        if (response.Succeeded)
+        {
+            StateHasChanged();
+            _signUpModel.Email = default;
+            _signUpModel.Password = default;
+            Snackbar.Add("Account has been created.", Severity.Success);
+            NavigationManager.NavigateTo("/identity/user/login");
+        }*/
+    }
 }
