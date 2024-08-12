@@ -14,8 +14,19 @@ namespace Ekid.Infrastructure;
 
 public static class Bootstrap
 {
+    private const string CorsPolicy = "cors";
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddCors(cors =>
+        {
+            cors.AddPolicy(CorsPolicy, x =>
+            {
+                x.WithOrigins("http://localhost:5158")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+        });
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
@@ -30,6 +41,7 @@ public static class Bootstrap
 
     public static void UseInfrastructure(this WebApplication app)
     {
+        app.UseCors(CorsPolicy);
         app.Services.RegisterAllPermissions();
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -43,7 +55,7 @@ public static class Bootstrap
         app.UseMiddleware<ExecutionPolicyMiddleware>();
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseEndpoints(endpoints => endpoints.UseModuleEndpoints());
+        app.UseModuleEndpoints();
         app.MapControllers();
     }
 }

@@ -1,3 +1,3 @@
 namespace Ekid.Web.Models.Identity;
 
-public record User(string Id, string Email, string Role, string AccessToken, string RefreshToken, long Expires);
+public record User(string Email, string Role, string AccessToken, long Expires);

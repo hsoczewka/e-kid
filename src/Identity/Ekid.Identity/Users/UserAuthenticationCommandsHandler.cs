@@ -8,7 +8,8 @@ namespace Ekid.Identity.Users;
 
 public class UserAuthenticationCommandsHandler : 
     ICommandHandler<SignUp>, 
-    ICommandHandler<SignIn>
+    ICommandHandler<LogIn>,
+    ICommandHandler<RefreshToken>
 {
     private readonly UserAccountRepository _userAccountRepository;
     private readonly IPasswordHasher<UserCredentials> _passwordHasher;
@@ -47,7 +48,7 @@ public class UserAuthenticationCommandsHandler :
         }
     }
 
-    public async Task HandleAsync(SignIn command, CancellationToken cancellationToken)
+    public async Task HandleAsync(LogIn command, CancellationToken cancellationToken)
     {
         var userCredentials = await _userCredentialsRepository.GetByEmailAsync(command.Email, cancellationToken);
         if (userCredentials is null)
@@ -58,6 +59,20 @@ public class UserAuthenticationCommandsHandler :
             throw new InvalidCredentialsException();
 
         var userAccount = await _userAccountRepository.GetByEmailAsync(command.Email, cancellationToken);
+        if (userAccount is null)
+            throw AuthenticationException.AccountNotExists();
+        
+        var jwt = _tokenGenerator.CreateToken(userCredentials.Id.Id, userAccount.Role);
+        command.Token = new UserAccessToken(AccessToken: jwt.AccessToken);
+    }
+
+    public async Task HandleAsync(RefreshToken command, CancellationToken cancellationToken)
+    {
+        var userCredentials = await _userCredentialsRepository.GetBySecureStamp(command.SecureStamp, cancellationToken);
+        if (userCredentials is null)
+            throw new InvalidCredentialsException();
+        
+        var userAccount = await _userAccountRepository.GetByEmailAsync(userCredentials.Email, cancellationToken);
         if (userAccount is null)
             throw AuthenticationException.AccountNotExists();
         

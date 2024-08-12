@@ -33,4 +33,10 @@ public class UserCredentialsRepository
             || x.Email == user.Email 
             || x.Login == user.Login, token);
     }
+
+    public async Task<UserCredentials?> GetBySecureStamp(string stamp, CancellationToken cancellationToken)
+    {
+        //TODO final implementation with stamp usage
+        return await _identityDbContext.UsersCredentials.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
+    }
 }

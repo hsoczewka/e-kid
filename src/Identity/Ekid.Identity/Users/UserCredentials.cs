@@ -11,6 +11,7 @@ public class UserCredentials
     public Password Password { get; private set; }
     public Email Email { get; private set; }
     private int _version;
+    //todo secureStamp
     
     public UserCredentials(UserId id, Login login, Password password, Email email)
     {

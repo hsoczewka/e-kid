@@ -6,8 +6,8 @@ namespace Ekid.Web.UI.Services;
 
 public interface IApiResponseHandler
 {
-    Task<ApiResponse> HandleAsync(Task<ApiResponse> request);
-    Task<T> HandleAsync<T>(Task<ApiResponse<T>> request);
+    Task<ApiResponse?> HandleAsync(Task<ApiResponse> request);
+    Task<T?> HandleAsync<T>(Task<ApiResponse<T>> request);
 }
 
 public class ApiResponseHandler : IApiResponseHandler
@@ -21,7 +21,7 @@ public class ApiResponseHandler : IApiResponseHandler
         _authenticationService = authenticationService;
     }
 
-    public async Task<ApiResponse> HandleAsync(Task<ApiResponse> request)
+    public async Task<ApiResponse?> HandleAsync(Task<ApiResponse> request)
     {
         var response = await request;
         if (response.Succeeded)
@@ -33,7 +33,7 @@ public class ApiResponseHandler : IApiResponseHandler
         return default;
     }
 
-    public async Task<T> HandleAsync<T>(Task<ApiResponse<T>> request)
+    public async Task<T?> HandleAsync<T>(Task<ApiResponse<T>> request)
     {
         var response = await request;
         if (response.Succeeded)
@@ -47,14 +47,14 @@ public class ApiResponseHandler : IApiResponseHandler
     
     private async Task HandleErrorAsync(ApiResponse response)
     {
-        if (response.HttpResponse.StatusCode == HttpStatusCode.Unauthorized)
+        if (response.HttpResponse?.StatusCode == HttpStatusCode.Unauthorized)
         {
             _snackbar.Add("Your session has expired - please sign in again.", Severity.Error);
-            await _authenticationService.SignOutAsync();
+            await _authenticationService.LogOutAsync();
             return;
         }
 
-        if (response.Errors?.Errors is {})
+        if (response.Errors?.Errors is not null)
         {
             foreach (var error in response.Errors.Errors)
             {

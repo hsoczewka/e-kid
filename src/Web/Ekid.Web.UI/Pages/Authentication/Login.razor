@@ -11,7 +11,7 @@
         <MudCard>
             <MudCardHeader>
                 <CardHeaderContent>
-                    <MudText Color="Color.Secondary" Align="Align.Center" Typo="Typo.h5"><b>Sign In</b></MudText>
+                    <MudText Color="Color.Secondary" Align="Align.Center" Typo="Typo.h5"><b>Log In</b></MudText>
                 </CardHeaderContent>
             </MudCardHeader>
             <MudCardContent>
@@ -22,11 +22,11 @@
                                   InputType="InputType.Password" Required="true"
                                   RequiredError="Password is required!"/>
                     <br/>
-                    <MudText>Don't have an account yet? Click <MudLink Color="Color.Secondary" Href="/sign-up" Style="cursor: pointer;">here</MudLink> to sign up.</MudText>
+                    <MudText>Don't have an account yet? Click <MudLink Color="Color.Secondary" Href="/identity/user/sign-up" Style="cursor: pointer;">here</MudLink> to sign up.</MudText>
                 </MudForm>
             </MudCardContent>
             <MudCardActions>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="_submitted || !_success" OnClick="SignInAsync" Class="ml-auto">Sign in</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="_submitted || !_success" OnClick="LoginAsync" Class="ml-auto">Login</MudButton>
             </MudCardActions>
         </MudCard>
     </div>
@@ -36,7 +36,7 @@
 @code {
     private bool _success;
     private bool _submitted;
-    private string[] _errors = { };
+    private string[] _errors = [];
     private SignInModel _signInModel = new();
 
     private class SignInModel
@@ -49,20 +49,20 @@
         public string Password { get; set; }
     }
     
-    private async Task SignInAsync()
+    private async Task LoginAsync()
     {
         _submitted = true;
-        var signedIn = await AuthenticationService.LoginAsync(_signInModel.Email, _signInModel.Password);
+        var loggedIn = await AuthenticationService.LoginAsync(_signInModel.Email, _signInModel.Password);
         _submitted = false;
 
-        if (signedIn is null)
+        if (loggedIn is null)
         {
-            Snackbar.Add("Couldn't sign in - service is unavailable :(", Severity.Error);
+            Snackbar.Add("Couldn't log in - service is unavailable.", Severity.Error);
             return;
         }
-        if (signedIn.Value)
+        if (loggedIn.Value)
         {
-            Snackbar.Add("Signed in.", Severity.Success);
+            Snackbar.Add("Logged in.", Severity.Success);
             NavigationManager.NavigateTo("/");
         }
         else
@@ -70,5 +70,4 @@
             Snackbar.Add("Invalid credentials.", Severity.Error);
         }
     }
-    
 }

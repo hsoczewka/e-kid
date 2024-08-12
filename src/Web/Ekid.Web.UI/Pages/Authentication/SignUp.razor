@@ -3,6 +3,7 @@
 @using System.ComponentModel.DataAnnotations
 @using System.Net
 @using Ekid.Web.UI.Services
+@using Ekid.Web.Users
 
 <MudContainer MaxWidth="MaxWidth.Small">
     <div style="max-width: 500px; margin-top: 30%;">
@@ -14,14 +15,15 @@
             </MudCardHeader>
             <MudCardContent>
                 <MudForm Model="@_signUpModel" @bind-IsValid="@_success" @bind-Errors="@_errors">
+                    <MudTextField @bind-Value="@_signUpModel.Login" T="string" HelperText="Login" Required="true" RequiredError="Login is required!"/>
                     <MudTextField @bind-Value="@_signUpModel.Email" T="string" HelperText="Email" Required="true" RequiredError="Email is required!"
-                                  Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})"/>
+                                  Validation="@(new EmailAddressAttribute() { ErrorMessage = "The email address is invalid" })"/>
                     <MudTextField @bind-Value="@_signUpModel.Password" T="string" HelperText="Password"
                                   InputType="InputType.Password" Required="true"
                                   Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))"
                                   RequiredError="Password is required!"/>
                     <br/>
-                    <MudText>Already have an account? Click <MudLink Color="Color.Secondary" Href="/identity/user/login" Style="cursor: pointer;">here</MudLink> to sign in.</MudText>
+                    <MudText>Already have an account? Click <MudLink Color="Color.Secondary" Href="/identity/user/login" Style="cursor: pointer;">here</MudLink> to log in.</MudText>
                 </MudForm>
             </MudCardContent>
             <MudCardActions>
@@ -35,21 +37,23 @@
 @code {
     private bool _success;
     private bool _submitted;
-    private string[] _errors = { };
+    private string[] _errors = [];
     private SignUpModel _signUpModel = new();
     [Inject] private IApiResponseHandler ApiResponseHandler { get; set; } = default!;
     [Inject] NavigationManager NavigationManager { get; set; } = default!;
-    [Inject] IAuthenticationService _authenticationService { get; set; } = default!;
+    [Inject] IUserAccountClient UserAccountClient { get; set; } = default!;
 
-    //TODO login text field
     private record SignUpModel
     {
         [Required]
+        public string? Login { get; set; }
+        
         [EmailAddress]
-        public string Email { get; set; }
+        [Required]
+        public string? Email { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string? Password { get; set; }
     }
     
     private IEnumerable<string> PasswordStrength(string password)
@@ -66,11 +70,14 @@
     private async Task SignUpAsync()
     {
         _submitted = true;
-        await _authenticationService.SignUpAsync(login: "", password: "", email:"");
+        var response = await ApiResponseHandler.HandleAsync(UserAccountClient.SignUpAsync(
+            new Users.Contracts.SignUp(Login: _signUpModel.Login!,
+                Password: _signUpModel.Password!,
+                Email: _signUpModel.Email!)));
 
         _submitted = false;
 
-        /*if (response is null || response.HttpResponse.StatusCode == HttpStatusCode.BadGateway)
+        if (response is null || response.HttpResponse?.StatusCode == HttpStatusCode.BadGateway)
         {
             Snackbar.Add("Couldn't sign up - service is unavailable :(", Severity.Error);
             return;
@@ -79,10 +86,11 @@
         if (response.Succeeded)
         {
             StateHasChanged();
+            _signUpModel.Login = default;
             _signUpModel.Email = default;
             _signUpModel.Password = default;
             Snackbar.Add("Account has been created.", Severity.Success);
             NavigationManager.NavigateTo("/identity/user/login");
-        }*/
+        }
     }
 }
