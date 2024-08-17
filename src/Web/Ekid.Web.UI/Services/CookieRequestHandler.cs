@@ -9,5 +9,4 @@ public class CookieRequestHandler : DelegatingHandler
         request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
         return await base.SendAsync(request, cancellationToken);
     }
-    
 }

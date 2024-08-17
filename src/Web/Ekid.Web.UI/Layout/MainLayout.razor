@@ -1,7 +1,7 @@
 ﻿@using Ekid.Web.UI.Services
-@using Ekid.Web.UI.Pages
 @inherits LayoutComponentBase
 @inject IAuthenticationService AuthenticationService;
+@attribute [Authorize]
 
 <MudLayout>
     <MudAppBar Elevation="1">
